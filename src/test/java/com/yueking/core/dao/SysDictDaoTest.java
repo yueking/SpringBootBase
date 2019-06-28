@@ -19,6 +19,7 @@ public class SysDictDaoTest extends BaseTest {
         key.setDictKey("XB");
         SysDict dict = new SysDict();
         dict.setId(key);
+        dict.setDictValue("value");
         dict.setRoot(true);
         dict.setLevel(0);
 

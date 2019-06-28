@@ -20,10 +20,8 @@ public class SysDict {
     @Size(max = 50)
     private String dictValue;
 
-    @NotNull
     @Size(max = 30)
     private String parentKey;
-    @NotNull
     @Size(max = 30)
     private String parentType;
     private int level;
