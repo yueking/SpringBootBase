@@ -20,4 +20,11 @@ public class SysDictKey implements Serializable {
     @NotNull
     @Size(max = 30)
     private String dictType;
+
+    public SysDictKey(){}
+
+    public SysDictKey(String dictKey, String dictType) {
+        this.dictKey = dictKey;
+        this.dictType = dictType;
+    }
 }

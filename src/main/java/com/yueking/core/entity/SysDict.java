@@ -3,11 +3,10 @@ package com.yueking.core.entity;
 import com.yueking.core.entity.id.SysDictKey;
 import lombok.Data;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Data
 @Entity
@@ -26,4 +25,8 @@ public class SysDict {
     private String parentType;
     private int level;
     private boolean root;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "sys_dict_join")
+    private Set<SysDict> subDictList;
 }

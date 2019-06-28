@@ -4,7 +4,11 @@ import com.yueking.BaseTest;
 import com.yueking.core.entity.SysDict;
 import com.yueking.core.entity.id.SysDictKey;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.jdbc.Sql;
 import org.testng.annotations.Test;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.testng.Assert.*;
 
@@ -14,15 +18,32 @@ public class SysDictDaoTest extends BaseTest {
 
     @Test
     public void testAddDict() {
-        SysDictKey key = new SysDictKey();
-        key.setDictType("XB");
-        key.setDictKey("XB");
-        SysDict dict = new SysDict();
-        dict.setId(key);
-        dict.setDictValue("value");
-        dict.setRoot(true);
-        dict.setLevel(0);
-
-        dictDao.save(dict);
+//        SysDictKey key = new SysDictKey();
+//        key.setDictType("XB");
+//        key.setDictKey("XB");
+//        SysDict dictRoot = new SysDict();
+//        dictRoot.setId(key);
+//        dictRoot.setDictValue("value");
+//        dictRoot.setRoot(true);
+//        dictRoot.setLevel(0);
+//
+//        SysDict d1 = new SysDict();
+//        d1.setId(new SysDictKey("1","XB"));
+//        d1.setDictValue("男");
+//
+//        SysDict d2 = new SysDict();
+//        d2.setId(new SysDictKey("2","XB"));
+//        d2.setDictValue("女");
+//
+//        Set list = new HashSet();
+//        list.add(d1);
+//        list.add(d2);
+//
+//        dictRoot.setSubDictList(list);
+//
+//
+//
+//
+//        dictDao.save(dictRoot);
     }
 }
