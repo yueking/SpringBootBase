@@ -1,0 +1,35 @@
+{
+  "dictValue": "性别代码",
+  "subDictList": [
+    {
+      "dictValue": "男",
+      "subDictList": [],
+      "parentKey": "XBDM",
+      "level": 1,
+      "root": false,
+      "id": {
+        "dictKey": "1",
+        "dictType": "XBDM"
+      },
+      "parentType": "XBDM"
+    },
+    {
+      "dictValue": "女",
+      "subDictList": [],
+      "parentKey": "XBDM",
+      "level": 1,
+      "root": false,
+      "id": {
+        "dictKey": "2",
+        "dictType": "XBDM"
+      },
+      "parentType": "XBDM"
+    }
+  ],
+  "level": 0,
+  "root": true,
+  "id": {
+    "dictKey": "XBDM",
+    "dictType": "XBDM"
+  }
+}
