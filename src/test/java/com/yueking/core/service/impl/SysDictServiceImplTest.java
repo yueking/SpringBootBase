@@ -51,6 +51,19 @@ public class SysDictServiceImplTest extends BaseTest {
     }
 
     @Test
+    public void testAddDictTree() {
+        SysDict root = new SysDict("QHDM","区划代码");
+        SysDict d1= new SysDict("410000","河南省",root);
+        SysDict d2= new SysDict("410100","郑州市",d1);
+        SysDict d3= new SysDict("410103","郑州市二七区",d2);
+
+        SysDict d4= new SysDict("410200","开封市",root);
+        SysDict d5= new SysDict("410201","开封市老城",d4);
+
+        dictService.addDict(root);
+    }
+
+    @Test
     public void testGetAllRootDict() {
         List<SysDict> rootDict = dictService.getAllRootDict();
         for (SysDict dict : rootDict) {

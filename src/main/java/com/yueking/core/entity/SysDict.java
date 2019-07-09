@@ -64,6 +64,7 @@ public class SysDict {
         SysDictKey  key = new SysDictKey(dictKey,parentDict.getId().getDictType());
         this.setId(key);
         this.setDictValue(dictValue);
+        this.setLevel(parentDict.getLevel()+1);
 
         this.setParentKey(parentDict.getId().getDictKey());
         this.setParentType(parentDict.getId().getDictType());
