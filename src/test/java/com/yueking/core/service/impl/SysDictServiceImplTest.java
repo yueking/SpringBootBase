@@ -27,6 +27,13 @@ public class SysDictServiceImplTest extends BaseTest {
     }
 
     @Test
+    public void testFindDictByID() {
+        SysDict dict = dictService.findDictById("410201", "QHDM");
+        System.out.printf("dict:"+dict);
+
+    }
+
+    @Test
     public void testAddSubDict() {
         SysDict rootDict = dictService.findDictById("XBDM", "XBDM");
         dictService.addSubDict("1","男",rootDict);
