@@ -9,7 +9,7 @@ public interface SysDictService {
 
     SysDict findDictById(String dictKey,String dictType);
 
-    void addDict(String dictKey, String dictValue, SysDict parentDict);
+    void addSubDict(String dictKey, String dictValue, SysDict parentDict);
 
     void addDict(SysDict dict);
 

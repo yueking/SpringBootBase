@@ -15,24 +15,15 @@ import java.util.List;
 public class SysDictServiceImpl implements SysDictService {
     @Autowired
     SysDictDao dictDao;
+
     @Override
-    public void addRootDict(String dictKey, String dictValue){
-        SysDictKey key = new SysDictKey();
-        key.setDictType(dictKey);
-        key.setDictKey(dictKey);
-
-        SysDict dictRoot = new SysDict();
-        dictRoot.setId(key);
-        dictRoot.setDictValue(dictValue);
-        dictRoot.setRoot(true);
-        dictRoot.setLevel(0);
-
+    public void addRootDict(String dictKey, String dictValue) {
+        SysDict dictRoot = new SysDict(dictKey, dictValue);
         dictDao.save(dictRoot);
-
     }
 
     @Override
-    public SysDict findDictById(String dictKey,String dictType) {
+    public SysDict findDictById(String dictKey, String dictType) {
         SysDictKey key = new SysDictKey();
         key.setDictKey(dictKey);
         key.setDictType(dictType);
@@ -40,10 +31,8 @@ public class SysDictServiceImpl implements SysDictService {
     }
 
     @Override
-    public void addDict(String dictKey, String dictValue, SysDict parentDict) {
-
-        SysDict dict = new SysDict(dictKey,dictValue,parentDict);
-
+    public void addSubDict(String dictKey, String dictValue, SysDict parentDict) {
+        SysDict dict = new SysDict(dictKey, dictValue, parentDict);
         dictDao.save(dict);
     }
 

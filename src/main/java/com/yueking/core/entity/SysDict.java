@@ -35,17 +35,31 @@ public class SysDict {
     })
 
     private Set<SysDict> subDictList;
-//todo dict method
+
     public SysDict(){
         subDictList = new HashSet<>();
     }
+
+    /**
+     * root dict
+     * @param dictKey
+     * @param dictValue
+     */
     public SysDict(String dictKey, String dictValue){
-        super();
         SysDictKey  key = new SysDictKey(dictKey,dictKey);
         this.setId(key);
         this.setDictValue(dictValue);
+        this.setRoot(true);
+        this.setLevel(0);
         this.subDictList = new HashSet<>();
     }
+
+    /**
+     * sub dict
+     * @param dictKey
+     * @param dictValue
+     * @param parentDict
+     */
     public SysDict(String dictKey, String dictValue, SysDict parentDict){
         SysDictKey  key = new SysDictKey(dictKey,parentDict.getId().getDictType());
         this.setId(key);
@@ -54,12 +68,7 @@ public class SysDict {
         this.setParentKey(parentDict.getId().getDictKey());
         this.setParentType(parentDict.getId().getDictType());
         this.subDictList = new HashSet<>();
+        parentDict.getSubDictList().add(this);
     }
 
-    public SysDict(String dictKey, String dictValue, String dictType){
-        SysDictKey  key = new SysDictKey(dictKey,dictType);
-        this.setId(key);
-        this.setDictValue(dictValue);
-        this.subDictList = new HashSet<>();
-    }
 }

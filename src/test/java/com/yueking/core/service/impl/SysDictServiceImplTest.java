@@ -7,10 +7,7 @@ import com.yueking.core.service.SysDictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
-import java.util.HashSet;
 import java.util.List;
-
-import static org.testng.Assert.*;
 
 public class SysDictServiceImplTest extends BaseTest {
     @Autowired
@@ -30,34 +27,27 @@ public class SysDictServiceImplTest extends BaseTest {
     }
 
     @Test
-    public void testAddDict() {
+    public void testAddSubDict() {
         SysDict rootDict = dictService.findDictById("XBDM", "XBDM");
-        dictService.addDict("1","男",rootDict);
-        dictService.addDict("2","女",rootDict);
+        dictService.addSubDict("1","男",rootDict);
+        dictService.addSubDict("2","女",rootDict);
 
     }
 
     @Test
     public void testAddDictAll(){
-//        SysDict root = new SysDict("SFDM","是否代码","SFDM");
-//        root.setRoot(true);
-//        root.setLevel(0);
-
-//        SysDict d1 = new SysDict("1","是",root.getId().getDictType());
-//        SysDict d2 = new SysDict("2","否",root.getId().getDictType());
+        SysDict root = new SysDict("SFDM","是否代码");
 
 
-//        if (root.getSubDictList() == null) {
-//            root.setSubDictList(new HashSet<>());
-//            System.out.println("===========null");
-//        }
+        SysDict s1 = new SysDict("1","是",root);
+        SysDict s2 = new SysDict("0","否",root);
 
-//        root.getSubDictList().add(d1);
-//        root.getSubDictList().add(d2);
 
-//        System.out.println("===json:"+root);
+        System.out.println("=====:"+root.getSubDictList().size());
 
-//        dictService.addDict(root);
+//        root.getSubDictList().add(s1);
+//        root.getSubDictList().add(s2);
+        dictService.addDict(root);
     }
 
     @Test
