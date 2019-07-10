@@ -98,6 +98,22 @@
             <version>1.1.17</version>
         </dependency>
 
+        <!--ehcache 缓存框架-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+        </dependency>
+
         <!--test ng 集成 scope 设置成 compile 而不是 test 否则测试代码找不到测试框架依赖包-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

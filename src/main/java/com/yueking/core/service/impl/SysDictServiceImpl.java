@@ -5,6 +5,7 @@ import com.yueking.core.entity.SysDict;
 import com.yueking.core.entity.id.SysDictKey;
 import com.yueking.core.service.SysDictService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -41,6 +42,7 @@ public class SysDictServiceImpl implements SysDictService {
         dictDao.save(dict);
     }
 
+    @Cacheable(cacheNames = "dictCache",key = "'sysDict'",sync = true)
     @Override
     public List<SysDict> getAllRootDict() {
         return dictDao.findAllByRoot(true);

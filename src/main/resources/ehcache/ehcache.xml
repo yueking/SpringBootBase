@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config
+        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.3.xsd">
+    <!--指定缓存目录-->
+    <!--<persistence directory="${java.io.tmpdir}/cfa-cache-data"/>-->
+    <persistence directory="/Users/yueking"/>
+
+    <!--缓存模板-->
+    <cache-template name="default">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <resources>
+            <!--堆内内存可以放2000个条目，超出部分堆外100MB-->
+            <heap unit="entries">2000</heap>
+            <offheap unit="MB">100</offheap>
+        </resources>
+    </cache-template>
+
+    <!--实际的缓存区间，继承了default缓存模板,cfa 完全使用模板默认-->
+    <cache alias="cfa" uses-template="default">
+
+    </cache>
+
+    <!--下面两个继承了default缓存模板，但覆盖了缓存的过期时间-->
+    <cache alias="authority" uses-template="default">
+        <expiry>
+            <ttl unit="hours">1</ttl>
+        </expiry>
+    </cache>
+
+    <cache alias="lapp_service" uses-template="default">
+        <expiry>
+            <ttl unit="hours">24</ttl>
+        </expiry>
+    </cache>
+
+    <cache alias="dictCache" uses-template="default">
+        <expiry>
+            <ttl unit="hours">24</ttl>
+        </expiry>
+    </cache>
+</config>
