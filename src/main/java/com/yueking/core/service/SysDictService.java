@@ -16,7 +16,8 @@ public interface SysDictService {
     @CacheEvict(cacheNames = "dictCache",key = "#dictKey")
     void addSubDict(String dictKey, String dictValue, SysDict parentDict);
 
-    @Cacheable(cacheNames = "dictCache",value = "dict",key ="#dict.id",unless="#result == null")
+//    @Cacheable(value = "dict",key ="#dict.id",unless="#result == null")
+    @Cacheable(cacheNames = "dictCache",key ="#dict.id",unless="#result == null")
     SysDict findDictById(String dictKey,String dictType);
 
     @Cacheable(cacheNames = "dictCache",key = "'sysDict'")
