@@ -42,7 +42,6 @@ public class SysDictServiceImpl implements SysDictService {
         dictDao.save(dict);
     }
 
-//    @Cacheable(cacheNames = "dictCache", key = "'sysDict'")
     @Override
     public List<SysDict> getAllRootDict() {
         return dictDao.findAllByRoot(true);
