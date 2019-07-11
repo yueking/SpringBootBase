@@ -22,11 +22,14 @@ public class SysDictServiceImplTest extends BaseTest {
     @Test
     public void testGetByID() {
         System.out.println("-------------");
-        SysDict dict = dictService.findDictById("410000", "QHDM");
-        dict = dictService.findDictById("410000", "QHDM");
-        dict = dictService.findDictById("410000", "QHDM");
-        dict = dictService.findDictById("410000", "QHDM");
-//        dict = dictService.findDictById("410000", "QHDM");
+        SysDict dict = dictService.findDictById("410100", "QHDM");
+        dict = dictService.findDictById("410100", "QHDM");
+        System.out.printf("dict:" + dict);
+        dict.setDictValue("郑州市区1");
+        dictService.addDict(dict);
+        dict = dictService.findDictById("410100", "QHDM");
+        System.out.printf("dict:" + dict);
+        dict = dictService.findDictById("410100", "QHDM");
         System.out.printf("dict:" + dict);
 
     }

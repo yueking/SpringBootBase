@@ -7,7 +7,8 @@ import org.springframework.cache.annotation.Cacheable;
 import java.util.List;
 
 public interface SysDictService {
-    @CacheEvict(cacheNames = "dictCache",key = "#dict.id")
+//    @CacheEvict(cacheNames = "dictCache",key = "#dict.id")
+    @CacheEvict(cacheNames = "dictCache",key = "#dict.id.dictKey+#dict.id.dictType")
     void addDict(SysDict dict);
 
     @CacheEvict(cacheNames = "dictCache",key = "#dictType+#dictType")
@@ -16,8 +17,7 @@ public interface SysDictService {
     @CacheEvict(cacheNames = "dictCache",key = "#dictKey+#parentDict.dictType")
     void addSubDict(String dictKey, String dictValue, SysDict parentDict);
 
-//    @Cacheable(value = "dict",key ="#dict.id",unless="#result == null")
-    @Cacheable(cacheNames = "dictCache",key ="#dictKey+#dictType")
+    @Cacheable(cacheNames = "dictCache",key ="#dictKey+#dictType",unless="#result == null")
     SysDict findDictById(String dictKey,String dictType);
 
     @Cacheable(cacheNames = "dictCache",key = "'sysDict'")
