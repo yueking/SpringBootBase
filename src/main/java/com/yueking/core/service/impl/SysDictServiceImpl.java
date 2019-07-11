@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -28,7 +29,9 @@ public class SysDictServiceImpl implements SysDictService {
         SysDictKey key = new SysDictKey();
         key.setDictKey(dictKey);
         key.setDictType(dictType);
-        return dictDao.getOne(key);
+        Optional<SysDict> result = dictDao.findById(key);
+        return result.get();
+//        return dictDao.getOne(key);
     }
 
     @Override

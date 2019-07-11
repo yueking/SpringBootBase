@@ -23,7 +23,9 @@ public class SysDictServiceImplTest extends BaseTest {
     public void testGetByID() {
         System.out.println("-------------");
         SysDict dict = dictService.findDictById("410000", "QHDM");
-//        dict = dictService.findDictById("410000", "QHDM");
+        dict = dictService.findDictById("410000", "QHDM");
+        dict = dictService.findDictById("410000", "QHDM");
+        dict = dictService.findDictById("410000", "QHDM");
 //        dict = dictService.findDictById("410000", "QHDM");
         System.out.printf("dict:" + dict);
 

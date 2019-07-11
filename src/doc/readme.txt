@@ -16,3 +16,14 @@
 ========================================================================
 3.系统配置 com.yueking.core.conf 配置spring boot database mvc 等
 ========================================================================
+
+------------------------------------------------------------------------
+dictDao.getOne(key); 存在 lazy 问题：
+解决：spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true
+------------------------------------------------------------------------
+打开ehcache 缓存后
+问题再次出现
+解决:
+getOne(key) 换成 findById(key)
+原因:
+    getOne 是 lazy findById 不是lazy
