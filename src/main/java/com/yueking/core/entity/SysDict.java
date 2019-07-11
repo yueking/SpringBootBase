@@ -43,11 +43,11 @@ public class SysDict implements Serializable {
 
     /**
      * root dict
-     * @param dictKey
+     * @param dictType
      * @param dictValue
      */
-    public SysDict(String dictKey, String dictValue){
-        SysDictKey  key = new SysDictKey(dictKey,dictKey);
+    public SysDict(String dictType, String dictValue){
+        SysDictKey  key = new SysDictKey(dictType,dictType);
         this.setId(key);
         this.setDictValue(dictValue);
         this.setRoot(true);

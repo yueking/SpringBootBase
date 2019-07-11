@@ -19,8 +19,8 @@ public class SysDictServiceImpl implements SysDictService {
     SysDictDao dictDao;
 
     @Override
-    public void addRootDict(String dictKey, String dictValue) {
-        SysDict dictRoot = new SysDict(dictKey, dictValue);
+    public void addRootDict(String dictType, String dictValue) {
+        SysDict dictRoot = new SysDict(dictType, dictValue);
         dictDao.save(dictRoot);
     }
 
@@ -48,6 +48,11 @@ public class SysDictServiceImpl implements SysDictService {
     @Override
     public List<SysDict> getAllRootDict() {
         return dictDao.findAllByRoot(true);
+    }
+
+    @Override
+    public void deleteById(String dictKey, String dictType) {
+        dictDao.deleteById(new SysDictKey(dictKey,dictType));
     }
 
 }

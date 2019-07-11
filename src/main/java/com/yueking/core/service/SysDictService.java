@@ -10,10 +10,10 @@ public interface SysDictService {
     @CacheEvict(cacheNames = "dictCache",key = "#dict.id")
     void addDict(SysDict dict);
 
-    @CacheEvict(cacheNames = "dictCache",key = "#dictKey")
-    void addRootDict(String dictKey,String dictValue);
+    @CacheEvict(cacheNames = "dictCache",key = "#dictType+#dictType")
+    void addRootDict(String dictType,String dictValue);
 
-    @CacheEvict(cacheNames = "dictCache",key = "#dictKey")
+    @CacheEvict(cacheNames = "dictCache",key = "#dictKey+#parentDict.dictType")
     void addSubDict(String dictKey, String dictValue, SysDict parentDict);
 
 //    @Cacheable(value = "dict",key ="#dict.id",unless="#result == null")
@@ -22,5 +22,8 @@ public interface SysDictService {
 
     @Cacheable(cacheNames = "dictCache",key = "'sysDict'")
     List<SysDict> getAllRootDict();
+
+    @CacheEvict(cacheNames = "dictCache",key ="#dictKey+#dictType")
+    void deleteById(String dictKey, String dictType);
 
 }
