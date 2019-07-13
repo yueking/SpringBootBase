@@ -136,4 +136,29 @@ public class ShiroTest extends BaseTest {
         System.out.println("encryptPassword yueking:"+yueking);
 
     }
+
+    @Test
+    public void testTestPasswordRealm() {
+        System.out.println("========shiro");
+        //1.获取SecurityManager factory
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro/shiro-passwordservice.ini");
+
+        //2.使用securityManager 绑定 securityUtils
+        SecurityManager securityManager = factory.getInstance();
+        SecurityUtils.setSecurityManager(securityManager);
+
+        //3.获取 subject 及 创建 用户名 密码Token 身份/凭证
+        Subject subject = SecurityUtils.getSubject();
+
+        UsernamePasswordToken token = new UsernamePasswordToken("yueking", "123");
+
+        subject.login(token);
+
+        System.out.println("---"+subject.isAuthenticated());
+//        Assert.assertTrue(subject.isPermitted("user:create"));
+//        Assert.assertTrue(subject.isPermittedAll("user:update","user:delete"));
+
+//        subject.checkPermission("user:create");
+
+    }
 }
