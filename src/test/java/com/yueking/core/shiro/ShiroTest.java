@@ -167,7 +167,7 @@ public class ShiroTest extends BaseTest {
         //3.获取 subject 及 创建 用户名 密码Token 身份/凭证
         Subject subject = SecurityUtils.getSubject();
 
-        UsernamePasswordToken token = new UsernamePasswordToken("yueking", "123");
+        UsernamePasswordToken token = new UsernamePasswordToken("yuekinger", "123");
 
         subject.login(token);
 
