@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Data
-@Entity
+//@Entity
 @Table(name = "sys_user")
 public class User {
     @Id
