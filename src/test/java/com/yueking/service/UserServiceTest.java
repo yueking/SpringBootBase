@@ -1,6 +1,7 @@
 package com.yueking.service;
 
 import com.yueking.BaseTest;
+import com.yueking.core.entity.SysPermissionsEntity;
 import com.yueking.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;

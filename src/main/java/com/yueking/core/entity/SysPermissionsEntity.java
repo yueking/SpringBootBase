@@ -1,69 +1,32 @@
 package com.yueking.core.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Objects;
+import java.util.Set;
 
-//@Entity
-@Table(name = "sys_permissions", schema = "db", catalog = "")
+@Data
+@Entity
+@Table(name = "y_permissions",
+        indexes = {
+                @Index(name = "idx_sys_permissions_permission", columnList = "permission", unique = true)
+        }
+)
 public class SysPermissionsEntity {
-    private long id;
-    private String permission;
-    private String description;
-    private Byte available;
-
     @Id
-    @Column(name = "id")
-    public long getId() {
-        return id;
-    }
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
+    @Size(max = 100)
+    private String permission;
+    @Size(max = 100)
+    private String description;
     @Basic
-    @Column(name = "permission")
-    public String getPermission() {
-        return permission;
-    }
+    private boolean available;
 
-    public void setPermission(String permission) {
-        this.permission = permission;
-    }
 
-    @Basic
-    @Column(name = "description")
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
-    @Basic
-    @Column(name = "available")
-    public Byte getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Byte available) {
-        this.available = available;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SysPermissionsEntity that = (SysPermissionsEntity) o;
-        return id == that.id &&
-                Objects.equals(permission, that.permission) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(available, that.available);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, permission, description, available);
-    }
 }

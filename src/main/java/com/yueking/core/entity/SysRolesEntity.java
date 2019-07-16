@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
+import java.util.Set;
 
 @Data
 @Entity
@@ -26,6 +27,10 @@ public class SysRolesEntity {
     private boolean available;
     @Basic
     private String name;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "y_roles_permissions",joinColumns = @JoinColumn(name="role_id"),inverseJoinColumns = @JoinColumn(name = "permission_id"))
+    private Set<SysPermissionsEntity> permissions;
 
 
 }
