@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Data
 @Entity
@@ -25,6 +26,10 @@ public class SysUsersEntity {
     private String salt;
     @Basic
     private boolean locked;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "y_users_roles",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<SysRolesEntity> roles;
 
 
 
