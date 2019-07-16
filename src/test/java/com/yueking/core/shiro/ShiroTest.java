@@ -1,6 +1,9 @@
 package com.yueking.core.shiro;
 
+import com.beust.jcommander.converters.EnumConverter;
 import com.yueking.BaseTest;
+import org.apache.commons.beanutils.BeanUtilsBean;
+import org.apache.commons.beanutils.converters.AbstractConverter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.DefaultPasswordService;
@@ -10,6 +13,7 @@ import org.apache.shiro.crypto.hash.DefaultHashService;
 import org.apache.shiro.crypto.hash.HashRequest;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.util.Factory;
@@ -149,7 +153,7 @@ public class ShiroTest extends BaseTest {
         int hashIterations = 2;
 
         System.out.println("salt2:"+salt2);
-        SimpleHash hash = new SimpleHash(algorithmName,username,salt1+salt2,hashIterations);
+        SimpleHash hash = new SimpleHash(algorithmName,password,salt1+salt2,hashIterations);
         String encodedPassword = hash.toHex();
         System.out.println("encodedPassword:"+encodedPassword);
     }
@@ -214,11 +218,39 @@ public class ShiroTest extends BaseTest {
         //3.获取 subject 及 创建 用户名 密码Token 身份/凭证
         Subject subject = SecurityUtils.getSubject();
 
-        UsernamePasswordToken token = new UsernamePasswordToken("liu", "123");
+//        UsernamePasswordToken token = new UsernamePasswordToken("liu", "123");
+//        UsernamePasswordToken token = new UsernamePasswordToken("like", "123");
+        UsernamePasswordToken token = new UsernamePasswordToken("yuekinger", "123");
 
         subject.login(token);
 
         System.out.println("---:" + subject.isAuthenticated());
 
     }
+
+    @Test
+    public void testHashedCredentialsMatcherJdbc() {
+//        BeanUtilsBean.getInstance().getConvertUtils().register(new EnumConverter(), JdbcRealm.SaltStyle.class);
+        System.out.println("========shiro========");
+        //1.获取SecurityManager factory
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro/shiro-hashedCredentialsMatcher-jdbc.ini");
+
+        //2.使用securityManager 绑定 securityUtils
+        SecurityManager securityManager = factory.getInstance();
+        SecurityUtils.setSecurityManager(securityManager);
+
+        //3.获取 subject 及 创建 用户名 密码Token 身份/凭证
+        Subject subject = SecurityUtils.getSubject();
+
+        UsernamePasswordToken token = new UsernamePasswordToken("liu", "123");
+//        UsernamePasswordToken token = new UsernamePasswordToken("like", "123");
+//        UsernamePasswordToken token = new UsernamePasswordToken("yuekinger", "123");
+
+        subject.login(token);
+
+        System.out.println("---:" + subject.isAuthenticated());
+
+    }
+
+
 }
