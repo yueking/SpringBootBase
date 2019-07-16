@@ -180,7 +180,7 @@ public class ShiroTest extends BaseTest {
     }
 
     @Test
-    public void testJdbcPassword() {
+    public void testJdbcPasswordService() {
 
         System.out.println("========shiro========");
         //1.获取SecurityManager factory
@@ -201,5 +201,24 @@ public class ShiroTest extends BaseTest {
 
     }
 
+    @Test
+    public void testHashedCredentialsMatcher() {
+        System.out.println("========shiro========");
+        //1.获取SecurityManager factory
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro/shiro-hashedCredentialsMatcher.ini");
 
+        //2.使用securityManager 绑定 securityUtils
+        SecurityManager securityManager = factory.getInstance();
+        SecurityUtils.setSecurityManager(securityManager);
+
+        //3.获取 subject 及 创建 用户名 密码Token 身份/凭证
+        Subject subject = SecurityUtils.getSubject();
+
+        UsernamePasswordToken token = new UsernamePasswordToken("liu", "123");
+
+        subject.login(token);
+
+        System.out.println("---:" + subject.isAuthenticated());
+
+    }
 }
