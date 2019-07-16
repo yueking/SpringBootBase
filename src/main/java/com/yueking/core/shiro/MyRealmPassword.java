@@ -26,11 +26,12 @@ public class MyRealmPassword extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         //进入用户登录
-        if (!token.getPrincipal().equals("yueking")) {
+        if (!token.getPrincipal().equals("yuewu")) {
             System.out.println("不存在："+token.getPrincipal());
             return null;
         }
         //实际项目中需要使用 passwordService 加密后保存到数据库中
-        return new SimpleAuthenticationInfo("yueking",passwordService.encryptPassword("123"),getName());
+        System.out.println("---:encryptPassword:"+passwordService.encryptPassword("123"));
+        return new SimpleAuthenticationInfo("yuewu",passwordService.encryptPassword("123"),getName());
     }
 }
