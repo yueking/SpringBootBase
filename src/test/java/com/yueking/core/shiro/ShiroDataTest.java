@@ -71,6 +71,14 @@ public class ShiroDataTest extends BaseTest {
     }
 
     @Test
+    public void testDeleteUserAll() {
+        List<SysUsersEntity> list = userDao.findAll();
+        for (SysUsersEntity usersEntity : list) {
+            userDao.delete(usersEntity);
+        }
+    }
+
+    @Test
     public void testUserDelete() {
         userDao.deleteById(7l);
     }
