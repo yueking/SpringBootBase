@@ -1,4 +1,4 @@
-package com.yueking.core.shiro;
+package com.yueking.core.shiro.yw.demo;
 
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 

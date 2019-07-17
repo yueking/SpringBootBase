@@ -1,4 +1,4 @@
-package com.yueking.core.service.shrio;
+package com.yueking.core.shiro.service;
 
 import org.apache.shiro.authz.Permission;
 

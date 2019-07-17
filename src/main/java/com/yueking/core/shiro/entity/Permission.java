@@ -1,4 +1,4 @@
-package com.yueking.core.entity.shrio;
+package com.yueking.core.shiro.entity;
 
 import lombok.Data;
 

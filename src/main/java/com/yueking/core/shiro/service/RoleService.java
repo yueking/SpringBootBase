@@ -1,6 +1,6 @@
-package com.yueking.core.service.shrio;
+package com.yueking.core.shiro.service;
 
-import com.yueking.core.entity.shrio.Role;
+import com.yueking.core.shiro.entity.Role;
 
 public interface RoleService {
     public Role createRole(Role role);

@@ -1,6 +1,6 @@
-package com.yueking.core.service.shrio;
+package com.yueking.core.shiro.service;
 
-import com.yueking.core.entity.shrio.User;
+import com.yueking.core.shiro.entity.User;
 
 import java.util.Set;
 

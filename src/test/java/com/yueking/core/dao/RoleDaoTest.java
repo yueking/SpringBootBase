@@ -1,13 +1,14 @@
 package com.yueking.core.dao;
 
 import com.yueking.BaseTest;
-import com.yueking.core.entity.shrio.Role;
+import com.yueking.core.shiro.dao.RoleDao;
+import com.yueking.core.shiro.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
-public class SysRoleDaoTest extends BaseTest {
+public class RoleDaoTest extends BaseTest {
     @Autowired
-    SysRoleDao sysRoleDao;
+    RoleDao roleDao;
 
     @Test
     public void testAddRole() {
@@ -16,6 +17,6 @@ public class SysRoleDaoTest extends BaseTest {
         rolesEntity.setDescription("desc");
         rolesEntity.setRole("roleName");
 
-        sysRoleDao.save(rolesEntity);
+        roleDao.save(rolesEntity);
     }
 }

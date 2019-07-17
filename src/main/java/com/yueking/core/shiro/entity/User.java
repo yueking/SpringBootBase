@@ -1,6 +1,5 @@
-package com.yueking.core.entity.shrio;
+package com.yueking.core.shiro.entity;
 
-import com.yueking.core.entity.shrio.Role;
 import lombok.Data;
 
 import javax.persistence.*;

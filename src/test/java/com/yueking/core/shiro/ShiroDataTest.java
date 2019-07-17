@@ -1,12 +1,12 @@
 package com.yueking.core.shiro;
 
 import com.yueking.BaseTest;
-import com.yueking.core.dao.SysPermissionDao;
-import com.yueking.core.dao.SysRoleDao;
-import com.yueking.core.dao.SysUserDao;
-import com.yueking.core.entity.shrio.Permission;
-import com.yueking.core.entity.shrio.Role;
-import com.yueking.core.entity.shrio.User;
+import com.yueking.core.shiro.dao.PermissionDao;
+import com.yueking.core.shiro.dao.RoleDao;
+import com.yueking.core.shiro.dao.UserDao;
+import com.yueking.core.shiro.entity.Permission;
+import com.yueking.core.shiro.entity.Role;
+import com.yueking.core.shiro.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
@@ -16,13 +16,13 @@ import java.util.Optional;
 
 public class ShiroDataTest extends BaseTest {
     @Autowired
-    SysPermissionDao permissionDao;
+    PermissionDao permissionDao;
 
     @Autowired
-    SysRoleDao roleDao;
+    RoleDao roleDao;
 
     @Autowired
-    SysUserDao userDao;
+    UserDao userDao;
 
     @Test
     public void testPermissionAdd() {

@@ -1,9 +1,12 @@
 package com.yueking.core.dao;
 
 import com.yueking.BaseTest;
-import com.yueking.core.entity.shrio.Permission;
-import com.yueking.core.entity.shrio.Role;
-import com.yueking.core.entity.shrio.User;
+import com.yueking.core.shiro.dao.PermissionDao;
+import com.yueking.core.shiro.dao.RoleDao;
+import com.yueking.core.shiro.dao.UserDao;
+import com.yueking.core.shiro.entity.Permission;
+import com.yueking.core.shiro.entity.Role;
+import com.yueking.core.shiro.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
@@ -12,15 +15,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-public class SysUserDaoTest extends BaseTest {
+public class UserDaoTest extends BaseTest {
     @Autowired
-    SysUserDao userDao;
+    UserDao userDao;
 
     @Autowired
-    SysRoleDao roleDao;
+    RoleDao roleDao;
 
     @Autowired
-    SysPermissionDao permissionDao;
+    PermissionDao permissionDao;
 
     //    @Test(dependsOnMethods = "testDeleteUser")
     @Test
