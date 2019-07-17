@@ -26,59 +26,58 @@ public class ShiroDataTest extends BaseTest {
 
     @Test
     public void testPermissionAdd() {
-        SysPermissionsEntity entity = new SysPermissionsEntity();
-        entity.setPermission("permission3");
-        entity.setDescription("desc");
-        entity.setAvailable(true);
+        for (int i = 1; i < 4; i++) {
+            SysPermissionsEntity entity = new SysPermissionsEntity();
+            entity.setPermission("permission" + i);
+            entity.setDescription("desc");
+            entity.setAvailable(true);
 
-        permissionDao.save(entity);
+            permissionDao.save(entity);
+        }
+
     }
 
-    @Test
+    @Test(dependsOnMethods = "testPermissionAdd")
     public void testRoleAdd() {
-        SysRolesEntity entity = new SysRolesEntity();
-        entity.setRole("role2");
-        entity.setName("role2");
-        entity.setDescription("desc");
-        entity.setAvailable(true);
-
-        roleDao.save(entity);
-    }
-
-    @Test
-    public void testUserAdd() {
-        SysUsersEntity entity = new SysUsersEntity();
-        entity.setUsername("admin");
-        entity.setPassword("admin");
-        entity.setSalt("salt");
-
-        userDao.save(entity);
-    }
-
-    @Test
-    public void testPermissionsFindAll() {
         List<SysPermissionsEntity> list = permissionDao.findAll();
-        System.out.println("permission:"+list);
+
+        for (int i = 1; i < 3; i++) {
+            SysRolesEntity entity = new SysRolesEntity();
+            entity.setRole("role"+i);
+            entity.setName("role"+i);
+            entity.setDescription("desc");
+            entity.setAvailable(true);
+
+            entity.setPermissions(new HashSet<>(list));
+
+            roleDao.save(entity);
+        }
+
     }
 
-    @Test
-    public void testRoleFindAll() {
+    @Test(dependsOnMethods = {"testPermissionAdd","testRoleAdd"})
+    public void testUserAdd() {
         List<SysRolesEntity> list = roleDao.findAll();
-        System.out.println("Roles:"+list);
+        for (int i = 1; i < 3; i++) {
+            SysUsersEntity entity = new SysUsersEntity();
+            entity.setUsername("user"+i);
+            entity.setPassword("user"+i);
+            entity.setSalt("salt");
+
+            entity.setRoles(new HashSet<>(list));
+
+            userDao.save(entity);
+        }
     }
 
-    @Test
-    public void testUserFindAll() {
-        List<SysUsersEntity> list = userDao.findAll();
-        System.out.println("users:"+list);
-    }
+
 
     @Test
     public void testRoleUpdatePermission() {
         List<SysPermissionsEntity> list = permissionDao.findAll();
-        Optional<SysRolesEntity> result = roleDao.findById(60l);
+        Optional<SysRolesEntity> result = roleDao.findById(67l);
         SysRolesEntity roles = result.get();
-        System.out.println("roles:"+roles);
+        System.out.println("roles:" + roles);
 
         roles.setPermissions(new HashSet<>(list));
 
@@ -88,11 +87,28 @@ public class ShiroDataTest extends BaseTest {
     @Test
     public void testUserUpdateRoles() {
         List<SysRolesEntity> list = roleDao.findAll();
-        Optional<SysUsersEntity> result = userDao.findById(62l);
+        Optional<SysUsersEntity> result = userDao.findById(69l);
         SysUsersEntity user = result.get();
 
         user.setRoles(new HashSet<>(list));
-        System.out.println("user:"+user);
+        System.out.println("user:" + user);
         userDao.saveAndFlush(user);
+    }
+
+    @Test
+    public void testUserDelete() {
+        userDao.deleteById(103l);
+    }
+
+    @Test
+    public void testRoleDelete(){
+        roleDao.deleteById(101l);
+    }
+
+    @Test
+    public void testUserFindById() {
+        Optional<SysUsersEntity> result = userDao.findById(102l);
+        SysUsersEntity user = result.get();
+        System.out.println("user:"+user);
     }
 }
