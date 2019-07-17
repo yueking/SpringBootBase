@@ -1,9 +1,10 @@
 package com.yueking.core.shiro.service;
 
-import org.apache.shiro.authz.Permission;
+
+import com.yueking.core.shiro.entity.Permission;
 
 public interface PermissionService {
-    public Permission createPermission(Permission permission);
+    Permission createPermission(Permission permission);
 
-    public void deletePermission(Long permissionId);
+    void deletePermission(Long permissionId);
 }
