@@ -4,9 +4,9 @@ import com.yueking.BaseTest;
 import com.yueking.core.dao.SysPermissionDao;
 import com.yueking.core.dao.SysRoleDao;
 import com.yueking.core.dao.SysUserDao;
-import com.yueking.core.entity.SysPermissionsEntity;
-import com.yueking.core.entity.SysRolesEntity;
-import com.yueking.core.entity.SysUsersEntity;
+import com.yueking.core.entity.shrio.Permission;
+import com.yueking.core.entity.shrio.Role;
+import com.yueking.core.entity.shrio.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
@@ -27,7 +27,7 @@ public class ShiroDataTest extends BaseTest {
     @Test
     public void testPermissionAdd() {
         for (int i = 1; i < 4; i++) {
-            SysPermissionsEntity entity = new SysPermissionsEntity();
+            Permission entity = new Permission();
             entity.setPermission("permission" + i);
             entity.setDescription("desc");
             entity.setAvailable(true);
@@ -39,10 +39,10 @@ public class ShiroDataTest extends BaseTest {
 
     @Test(dependsOnMethods = "testPermissionAdd")
     public void testRoleAdd() {
-        List<SysPermissionsEntity> list = permissionDao.findAll();
+        List<Permission> list = permissionDao.findAll();
 
         for (int i = 1; i < 3; i++) {
-            SysRolesEntity entity = new SysRolesEntity();
+            Role entity = new Role();
             entity.setRole("role"+i);
             entity.setName("role"+i);
             entity.setDescription("desc");
@@ -57,9 +57,9 @@ public class ShiroDataTest extends BaseTest {
 
     @Test(dependsOnMethods = {"testPermissionAdd","testRoleAdd"})
     public void testUserAdd() {
-        List<SysRolesEntity> list = roleDao.findAll();
+        List<Role> list = roleDao.findAll();
         for (int i = 1; i < 3; i++) {
-            SysUsersEntity entity = new SysUsersEntity();
+            User entity = new User();
             entity.setUsername("user"+i);
             entity.setPassword("user"+i);
             entity.setSalt("salt");
@@ -72,8 +72,8 @@ public class ShiroDataTest extends BaseTest {
 
     @Test
     public void testDeleteUserAll() {
-        List<SysUsersEntity> list = userDao.findAll();
-        for (SysUsersEntity usersEntity : list) {
+        List<User> list = userDao.findAll();
+        for (User usersEntity : list) {
             userDao.delete(usersEntity);
         }
     }
@@ -85,9 +85,9 @@ public class ShiroDataTest extends BaseTest {
 
     @Test
     public void testUserUpdateRolesAdd() {
-        List<SysRolesEntity> list = roleDao.findAll();
-        Optional<SysUsersEntity> result = userDao.findById(7l);
-        SysUsersEntity user = result.get();
+        List<Role> list = roleDao.findAll();
+        Optional<User> result = userDao.findById(7l);
+        User user = result.get();
 
         user.setRoles(new HashSet<>(list));
         System.out.println("user:" + user);
@@ -96,8 +96,8 @@ public class ShiroDataTest extends BaseTest {
 
     @Test
     public void testUserUpdateRolesDelete() {
-        Optional<SysUsersEntity> result = userDao.findById(7l);
-        SysUsersEntity user = result.get();
+        Optional<User> result = userDao.findById(7l);
+        User user = result.get();
 
         user.setRoles(new HashSet<>());
         System.out.println("user:" + user);
@@ -106,17 +106,17 @@ public class ShiroDataTest extends BaseTest {
 //============
     @Test
     public void testUserFindById() {
-        Optional<SysUsersEntity> result = userDao.findById(7l);
-        SysUsersEntity user = result.get();
+        Optional<User> result = userDao.findById(7l);
+        User user = result.get();
         System.out.println("user:"+user);
     }
 
 
     @Test
     public void testRoleUpdatePermission() {
-        List<SysPermissionsEntity> list = permissionDao.findAll();
-        Optional<SysRolesEntity> result = roleDao.findById(67l);
-        SysRolesEntity roles = result.get();
+        List<Permission> list = permissionDao.findAll();
+        Optional<Role> result = roleDao.findById(67l);
+        Role roles = result.get();
         System.out.println("roles:" + roles);
 
         roles.setPermissions(new HashSet<>(list));

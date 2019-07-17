@@ -1,9 +1,9 @@
 package com.yueking.core.dao;
 
 import com.yueking.BaseTest;
-import com.yueking.core.entity.SysPermissionsEntity;
-import com.yueking.core.entity.SysRolesEntity;
-import com.yueking.core.entity.SysUsersEntity;
+import com.yueking.core.entity.shrio.Permission;
+import com.yueking.core.entity.shrio.Role;
+import com.yueking.core.entity.shrio.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
@@ -25,18 +25,18 @@ public class SysUserDaoTest extends BaseTest {
     //    @Test(dependsOnMethods = "testDeleteUser")
     @Test
     public void testAddSysUserAndRoles() {
-        SysUsersEntity usersEntity = new SysUsersEntity();
+        User usersEntity = new User();
         usersEntity.setLocked(false);
         usersEntity.setPassword("12354");
         usersEntity.setUsername("yuewu1");
         usersEntity.setSalt("salt");
 
-        SysRolesEntity rolesEntity = new SysRolesEntity();
+        Role rolesEntity = new Role();
         rolesEntity.setAvailable(true);
         rolesEntity.setDescription("desc");
         rolesEntity.setRole("roleName");
 
-        Set<SysRolesEntity> rolesEntitySet = new HashSet<>();
+        Set<Role> rolesEntitySet = new HashSet<>();
         rolesEntitySet.add(rolesEntity);
 
         usersEntity.setRoles(rolesEntitySet);
@@ -46,23 +46,23 @@ public class SysUserDaoTest extends BaseTest {
 
     @Test
     public void testFindById() {
-        Optional<SysUsersEntity> result = userDao.findById(43l);
-        SysUsersEntity user = result.get();
+        Optional<User> result = userDao.findById(43l);
+        User user = result.get();
         System.out.println("user:" + user);
     }
 
     @Test(dependsOnMethods = "testFindById")
     public void testUpdateUser() {
-        Optional<SysUsersEntity> result = userDao.findById(43l);
-        SysUsersEntity user = result.get();
+        Optional<User> result = userDao.findById(43l);
+        User user = result.get();
         System.out.println("user:" + user);
 
-        SysRolesEntity rolesEntity = new SysRolesEntity();
+        Role rolesEntity = new Role();
         rolesEntity.setAvailable(true);
         rolesEntity.setDescription("desc");
         rolesEntity.setRole("role1");
 
-        Set<SysRolesEntity> roles = user.getRoles();
+        Set<Role> roles = user.getRoles();
         roles.add(rolesEntity);
 
         user.setRoles(roles);
@@ -77,9 +77,9 @@ public class SysUserDaoTest extends BaseTest {
 
     @Test
     public void testUpdateUserAddRolesAll() {
-        List<SysRolesEntity> rolesEntityList = roleDao.findAll();
-        Optional<SysUsersEntity> result = userDao.findById(52l);
-        SysUsersEntity user = result.get();
+        List<Role> rolesEntityList = roleDao.findAll();
+        Optional<User> result = userDao.findById(52l);
+        User user = result.get();
 
         user.setRoles(new HashSet<>(rolesEntityList));
 
@@ -88,7 +88,7 @@ public class SysUserDaoTest extends BaseTest {
 
     @Test
     public void testAddRoles() {
-        SysRolesEntity rolesEntity = new SysRolesEntity();
+        Role rolesEntity = new Role();
         rolesEntity.setAvailable(true);
         rolesEntity.setDescription("desc");
         rolesEntity.setRole("role1");
@@ -98,7 +98,7 @@ public class SysUserDaoTest extends BaseTest {
 
     @Test
     public void testAddUser() {
-        SysUsersEntity user = new SysUsersEntity();
+        User user = new User();
         user.setLocked(false);
         user.setPassword("123");
         user.setUsername("admin");
@@ -109,7 +109,7 @@ public class SysUserDaoTest extends BaseTest {
 
     @Test
     public void testAddPermissions() {
-        SysPermissionsEntity entity = new SysPermissionsEntity();
+        Permission entity = new Permission();
         entity.setAvailable(true);
         entity.setDescription("P_Desc");
         entity.setPermission("permission2");
@@ -120,10 +120,10 @@ public class SysUserDaoTest extends BaseTest {
 
     @Test
     public void testUpdateAddRoleAllPermissions() {
-        List<SysPermissionsEntity> permissionsEntityList = permissionDao.findAll();
+        List<Permission> permissionsEntityList = permissionDao.findAll();
 
-        Optional<SysRolesEntity> result = roleDao.findById(50l);
-        SysRolesEntity roles = result.get();
+        Optional<Role> result = roleDao.findById(50l);
+        Role roles = result.get();
 
         System.out.println("role:"+roles);
         System.out.println("permissions:"+permissionsEntityList);

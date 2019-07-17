@@ -1,11 +1,10 @@
-package com.yueking.core.entity;
+package com.yueking.core.entity.shrio;
 
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.Objects;
-import java.util.Set;
+import java.io.Serializable;
 
 @Data
 @Entity
@@ -14,7 +13,7 @@ import java.util.Set;
                 @Index(name = "idx_sys_permissions_permission", columnList = "permission", unique = true)
         }
 )
-public class SysPermissionsEntity {
+public class Permission implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

@@ -1,9 +1,11 @@
-package com.yueking.core.entity;
+package com.yueking.core.entity.shrio;
 
+import com.yueking.core.entity.shrio.Permission;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Set;
 
 @Data
@@ -13,7 +15,7 @@ import java.util.Set;
                 @Index(name = "idx_sys_roles_role", columnList = "role",unique = true)
         }
 )
-public class SysRolesEntity {
+public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -29,7 +31,7 @@ public class SysRolesEntity {
 
     @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(name = "y_users_roles_permissions",joinColumns = @JoinColumn(name="role_id"),inverseJoinColumns = @JoinColumn(name = "permission_id"))
-    private Set<SysPermissionsEntity> permissions;
+    private Set<Permission> permissions;
 
 
 }

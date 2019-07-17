@@ -1,9 +1,11 @@
-package com.yueking.core.entity;
+package com.yueking.core.entity.shrio;
 
+import com.yueking.core.entity.shrio.Role;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Set;
 
 @Data
@@ -13,7 +15,7 @@ import java.util.Set;
                 @Index(name = "idx_sys_users_username", columnList = "username",unique = true)
         }
 )
-public class SysUsersEntity {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -29,7 +31,7 @@ public class SysUsersEntity {
 
     @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(name = "y_users_roles",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<SysRolesEntity> roles;
+    private Set<Role> roles;
 
 
 
