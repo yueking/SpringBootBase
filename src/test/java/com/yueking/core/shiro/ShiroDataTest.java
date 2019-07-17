@@ -70,6 +70,38 @@ public class ShiroDataTest extends BaseTest {
         }
     }
 
+    @Test
+    public void testUserDelete() {
+        userDao.deleteById(7l);
+    }
+
+    @Test
+    public void testUserUpdateRolesAdd() {
+        List<SysRolesEntity> list = roleDao.findAll();
+        Optional<SysUsersEntity> result = userDao.findById(7l);
+        SysUsersEntity user = result.get();
+
+        user.setRoles(new HashSet<>(list));
+        System.out.println("user:" + user);
+        userDao.saveAndFlush(user);
+    }
+
+    @Test
+    public void testUserUpdateRolesDelete() {
+        Optional<SysUsersEntity> result = userDao.findById(7l);
+        SysUsersEntity user = result.get();
+
+        user.setRoles(new HashSet<>());
+        System.out.println("user:" + user);
+        userDao.saveAndFlush(user);
+    }
+//============
+    @Test
+    public void testUserFindById() {
+        Optional<SysUsersEntity> result = userDao.findById(7l);
+        SysUsersEntity user = result.get();
+        System.out.println("user:"+user);
+    }
 
 
     @Test
@@ -84,31 +116,12 @@ public class ShiroDataTest extends BaseTest {
         roleDao.saveAndFlush(roles);
     }
 
-    @Test
-    public void testUserUpdateRoles() {
-        List<SysRolesEntity> list = roleDao.findAll();
-        Optional<SysUsersEntity> result = userDao.findById(69l);
-        SysUsersEntity user = result.get();
 
-        user.setRoles(new HashSet<>(list));
-        System.out.println("user:" + user);
-        userDao.saveAndFlush(user);
-    }
-
-    @Test
-    public void testUserDelete() {
-        userDao.deleteById(103l);
-    }
 
     @Test
     public void testRoleDelete(){
-        roleDao.deleteById(101l);
+        roleDao.deleteById(5l);
     }
 
-    @Test
-    public void testUserFindById() {
-        Optional<SysUsersEntity> result = userDao.findById(102l);
-        SysUsersEntity user = result.get();
-        System.out.println("user:"+user);
-    }
+
 }
