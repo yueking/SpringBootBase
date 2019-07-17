@@ -27,7 +27,7 @@ public class SysRolesEntity {
     @Basic
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(name = "y_users_roles_permissions",joinColumns = @JoinColumn(name="role_id"),inverseJoinColumns = @JoinColumn(name = "permission_id"))
     private Set<SysPermissionsEntity> permissions;
 

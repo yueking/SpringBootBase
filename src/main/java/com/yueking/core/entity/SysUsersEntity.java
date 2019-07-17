@@ -27,7 +27,7 @@ public class SysUsersEntity {
     @Basic
     private boolean locked;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(name = "y_users_roles",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<SysRolesEntity> roles;
 
