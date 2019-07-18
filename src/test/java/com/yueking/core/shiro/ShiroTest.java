@@ -1,15 +1,18 @@
 package com.yueking.core.shiro;
 
 import com.yueking.BaseTest;
+import com.yueking.core.shiro.realm.UserRealm;
 import com.yueking.core.shiro.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.DefaultPasswordService;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.DefaultHashService;
 import org.apache.shiro.crypto.hash.HashRequest;
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
@@ -20,6 +23,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class ShiroTest extends BaseTest {
+    @Autowired
+    UserRealm userRealm;
 
     @Autowired
     UserService userService;
@@ -254,21 +259,27 @@ public class ShiroTest extends BaseTest {
     }
 
     @Test
-    public void testHashedCredentialsMatcherJdbcMyRealm() {
-        System.out.println("========shiro========");
-        //1.获取SecurityManager factory
-        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro/shiro-hashedCredentialsMatcher-jdbc-myRealm.ini");
+    public void testHashedCredentialsMatcherUserMyRealm() {
+        System.out.println("=====hello");
 
-        SecurityManager securityManager = factory.getInstance();
+        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
+        credentialsMatcher.setHashAlgorithmName("md5");
+        credentialsMatcher.setHashIterations(2);
+        credentialsMatcher.setStoredCredentialsHexEncoded(true);
+
+        userRealm.setCredentialsMatcher(credentialsMatcher);
+
+
+        DefaultSecurityManager securityManager = new DefaultSecurityManager();
+        securityManager.setRealm(userRealm);
+
         SecurityUtils.setSecurityManager(securityManager);
 
         //3.获取 subject 及 创建 用户名 密码Token 身份/凭证
         Subject subject = SecurityUtils.getSubject();
 
-        UsernamePasswordToken token = new UsernamePasswordToken("yuekinger", "11");
+        UsernamePasswordToken token = new UsernamePasswordToken("yuekinger", "123");
 
         subject.login(token);
-
-        System.out.println("---:" + subject.isAuthenticated());
     }
 }

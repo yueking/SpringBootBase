@@ -11,7 +11,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserRealm extends AuthorizingRealm {
-//    @Autowired
+    @Autowired
     UserService userService ;
 
     @Override
@@ -56,11 +56,4 @@ public class UserRealm extends AuthorizingRealm {
         return authenticationInfo;
     }
 
-    public UserService getUserService() {
-        return userService;
-    }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
 }
