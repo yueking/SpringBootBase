@@ -1,12 +1,7 @@
 package com.yueking.core.shiro.service;
 
 import com.yueking.core.shiro.entity.Role;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-
-@Service
-@Transactional
 public interface RoleService {
      Role createRole(Role role);
      void deleteRole(Long roleId);

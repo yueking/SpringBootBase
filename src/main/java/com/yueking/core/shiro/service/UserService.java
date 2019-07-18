@@ -1,13 +1,9 @@
 package com.yueking.core.shiro.service;
 
 import com.yueking.core.shiro.entity.User;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Set;
 
-//@Service
-@Transactional
 public interface UserService {
     User createUser(User user); //创建账户
 

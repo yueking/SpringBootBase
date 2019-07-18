@@ -128,16 +128,24 @@
 
 
         <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>1.4.1</version>
+        <groupId>org.apache.shiro</groupId>
+        <artifactId>shiro-core</artifactId>
+        <version>1.4.1</version>
         </dependency>
         <!--集成 shiro-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.shiro</groupId>-->
+            <!--<artifactId>shiro-spring-boot-starter</artifactId>-->
+            <!--<version>1.4.1</version>-->
+        <!--</dependency>-->
+
         <!--<dependency>-->
         <!--<groupId>org.apache.shiro</groupId>-->
-        <!--<artifactId>shiro-spring-boot-starter</artifactId>-->
+        <!--<artifactId>shiro-spring</artifactId>-->
         <!--<version>1.4.1</version>-->
         <!--</dependency>-->
+
 
         <!--test ng 集成 scope 设置成 compile 而不是 test 否则测试代码找不到测试框架依赖包-->
         <dependency>
