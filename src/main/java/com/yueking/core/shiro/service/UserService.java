@@ -17,7 +17,12 @@ public interface UserService {
 
     User findByUsername(String username);// 根据用户名查找用户
 
-    Set<Role> findRoles(String username);// 根据用户名查找其角色
+    Set<String> getRolesByUser(User user);
+    Set<String> getPermissionsByUser(User user);
 
-    Set<Permission> findPermissions(String username); //根据用户名查找其权限
+//    @Deprecated
+//    Set<String> findRoles(String username);// 根据用户名查找其角色
+
+//    @Deprecated
+//    Set<String> findPermissions(String username); //根据用户名查找其权限
 }

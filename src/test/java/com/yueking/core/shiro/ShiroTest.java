@@ -1,6 +1,7 @@
 package com.yueking.core.shiro;
 
 import com.yueking.BaseTest;
+import com.yueking.core.shiro.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.DefaultPasswordService;
@@ -14,10 +15,14 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.util.Factory;
 import org.apache.shiro.util.SimpleByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class ShiroTest extends BaseTest {
+
+    @Autowired
+    UserService userService;
 
     @Test
     public void testShiro() {
@@ -248,5 +253,22 @@ public class ShiroTest extends BaseTest {
 
     }
 
+    @Test
+    public void testHashedCredentialsMatcherJdbcMyRealm() {
+        System.out.println("========shiro========");
+        //1.获取SecurityManager factory
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro/shiro-hashedCredentialsMatcher-jdbc-myRealm.ini");
 
+        SecurityManager securityManager = factory.getInstance();
+        SecurityUtils.setSecurityManager(securityManager);
+
+        //3.获取 subject 及 创建 用户名 密码Token 身份/凭证
+        Subject subject = SecurityUtils.getSubject();
+
+        UsernamePasswordToken token = new UsernamePasswordToken("yuekinger", "11");
+
+        subject.login(token);
+
+        System.out.println("---:" + subject.isAuthenticated());
+    }
 }

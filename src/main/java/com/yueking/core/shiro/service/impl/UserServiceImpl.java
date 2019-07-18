@@ -105,32 +105,70 @@ public class UserServiceImpl implements UserService {
         return userDao.findByUsername(username);
     }
 
-    @Deprecated
     @Override
-    public Set<Role> findRoles(String username) {
-        User user = userDao.findByUsername(username);
-        if (user != null) {
-            return user.getRoles();
-        } else {
-            return null;
+    public Set<String> getRolesByUser(User user) {
+        Set<String> roleNameList = new HashSet<>();
+        Set<Role> rolesList = user.getRoles();
+        for (Role role : rolesList) {
+            roleNameList.add(role.getRole());
         }
+        return roleNameList;
     }
 
-    @Deprecated
     @Override
-    public Set<Permission> findPermissions(String username) {
+    public Set<String> getPermissionsByUser(User user) {
         List<Permission> permissionList = new ArrayList<>();
+        Set<String> permissionNameList =  new HashSet<>();
 
-        User user = userDao.findByUsername(username);
         if (user != null) {
             Set<Role> userRoles = user.getRoles();
             for (Role userRole : userRoles) {
                 permissionList.addAll(userRole.getPermissions());
             }
-            return new HashSet<>(permissionList);
+
+            for (Permission permission : permissionList) {
+                permissionNameList.add(permission.getPermission());
+            }
+            return permissionNameList;
+        } else {
+            return null;
+        }
+    }
+
+/*
+    @Deprecated
+    @Override
+    public Set<String> findRoles(String username) {
+        Set<String> roleNameList = new HashSet<>();
+        User user = userDao.findByUsername(username);
+        Set<Role> rolesList = user.getRoles();
+        for (Role role : rolesList) {
+            roleNameList.add(role.getRole());
+        }
+        return roleNameList;
+    }
+
+    @Deprecated
+    @Override
+    public Set<String> findPermissions(String username) {
+        List<Permission> permissionList = new ArrayList<>();
+        Set<String> permissionNameList =  new HashSet<>();
+
+        User user = userDao.findByUsername(username);
+        if (user != null) {
+            Set<Role> userRoles = user.getRoles();
+
+            for (Role userRole : userRoles) {
+                permissionList.addAll(userRole.getPermissions());
+            }
+
+            for (Permission permission : permissionList) {
+                permissionNameList.add(permission.getPermission());
+            }
+           return permissionNameList;
         } else {
             return null;
         }
 
-    }
+    }*/
 }
