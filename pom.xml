@@ -127,23 +127,32 @@
         <!--</dependency>-->
 
 
-        <dependency>
-        <groupId>org.apache.shiro</groupId>
-        <artifactId>shiro-core</artifactId>
-        <version>1.4.1</version>
-        </dependency>
+
         <!--集成 shiro-->
 
+        <dependency>
+        <groupId>org.apache.shiro</groupId>
+        <artifactId>shiro-spring-boot-starter</artifactId>
+        <version>1.4.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.4.1</version>
+        </dependency>
+
+        <!--shiro web spring or shiro starter pick one-->
         <!--<dependency>-->
             <!--<groupId>org.apache.shiro</groupId>-->
-            <!--<artifactId>shiro-spring-boot-starter</artifactId>-->
-            <!--<version>1.4.1</version>-->
+            <!--<artifactId>shiro-web</artifactId>-->
+            <!--<version>1.4.0</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-        <!--<groupId>org.apache.shiro</groupId>-->
-        <!--<artifactId>shiro-spring</artifactId>-->
-        <!--<version>1.4.1</version>-->
+            <!--<groupId>org.apache.shiro</groupId>-->
+            <!--<artifactId>shiro-spring</artifactId>-->
+            <!--<version>1.4.1</version>-->
         <!--</dependency>-->
 
 
