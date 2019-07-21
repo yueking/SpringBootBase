@@ -2,6 +2,7 @@ package com.yueking.core.conf;
 
 import com.yueking.core.shiro.realm.UserRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -36,5 +37,15 @@ public class ShiroConfig {
         definition.addPathDefinition("/subLogin", "anon");
         definition.addPathDefinition("/**", "authc");
         return definition;
+    }
+
+//    @Bean("shiroFilter")
+    @Bean
+    ShiroFilterFactoryBean shiroFilter(){
+        ShiroFilterFactoryBean filterFactoryBean = new ShiroFilterFactoryBean();
+        filterFactoryBean.setSecurityManager(securityManager());
+//        filterFactoryBean.setLoginUrl("/login");
+//        filterFactoryBean.setFilterChainDefinitions("");
+        return filterFactoryBean;
     }
 }
