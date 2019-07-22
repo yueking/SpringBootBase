@@ -1,10 +1,10 @@
 package com.yueking.core.conf;
 
 //import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.yueking.core.shiro.realm.UserRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
@@ -64,7 +64,7 @@ public class ShiroConfig {
         filterFactoryBean.setSecurityManager(securityManager());
 
         //拦截器.
-//        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         // 配置不会被拦截的链接 顺序判断，因为前端模板采用了thymeleaf，这里不能直接使用 ("/static/**", "anon")来配置匿名访问，必须配置到每个静态目录
 //        filterChainDefinitionMap.put("/images/**", "anon");
 //        filterChainDefinitionMap.put("/css/**", "anon");
