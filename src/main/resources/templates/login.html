@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
-        <title>Title</title>
-        <link rel="shortcut icon" href="/images/apple.png">
-        </head>
+    <title>Title</title>
+    <link rel="shortcut icon" href="/images/apple.png">
+</head>
 <body>
 <h3>login page</h3>
 <img src="/images/apple.png"/>
 
-<shiro:user>
+<shiro:user name="yueking">
     user login
 </shiro:user>
+<shiro:guest>
+    <button name="user">guest</button>
+</shiro:guest>
+<shiro:user>
+    <button name="user">user</button>
+</shiro:user>
+<shiro:hasRole name="admin">
+    admin role
+</shiro:hasRole>
 
 <form action="subLogin">
     <input type="text" name="username"/>
