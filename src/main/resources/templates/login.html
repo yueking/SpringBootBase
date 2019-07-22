@@ -11,8 +11,9 @@
 <img src="/images/apple.png"/>
 
 <!--/*@thymesVar id="message" type="java.lang.String"*/-->
-<span th:text="${message}"/>
+<span th:text="${message}">default message</span>
 
+<label value="label"/>
 <form action="subLogin">
     <input type="text" name="username"/>
     <input type="password" name="password"/>
