@@ -1,6 +1,7 @@
 package com.yueking.core.conf;
 
 //import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.yueking.core.shiro.realm.UserRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -23,10 +24,10 @@ public class ShiroConfig {
      */
 
 
-//    @Bean(name = "shiroDialect")
-//    public ShiroDialect shiroDialect() {
-//        return new ShiroDialect();
-//    }
+    @Bean(name = "shiroDialect")
+    public ShiroDialect shiroDialect() {
+        return new ShiroDialect();
+    }
 
 
     @Bean
