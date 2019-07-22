@@ -1,18 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title><!DOCTYPE html>
-        <html lang="en" xmlns:th="http://www.thymeleaf.org">
-        <head>
-            <meta charset="UTF-8">
-            <title>Title</title>
-            <link rel="shortcut icon" href="/images/apple.png">
-        </head>
+    <title>Title</title>
+    <link rel="shortcut icon" href="/images/apple.png">
+</head>
 <body>
 <h3>home page</h3>
 
 <img src="/images/apple.png">
+
+<!--<shiro:user>user</shiro:user>-->
+<!--<shiro:hasRole th:name="role1"> hasRole role1</shiro:hasRole>-->
+<!--<shiro:hasRole th:name="role2"> hasRole role2</shiro:hasRole>-->
+<shiro:guest>
+    <button name="user">guest</button>
+</shiro:guest>
+<shiro:user>
+    <button name="user">user</button>
+</shiro:user>
+<shiro:hasRole name="admin">
+    admin role
+</shiro:hasRole>
+
 
 </body>
 </html>

@@ -57,6 +57,7 @@ public class ShiroConfig {
 //        filterChainDefinitionMap.put("/js/**", "anon");
 //        filterChainDefinitionMap.put("/html/**", "anon");
 
+        filterChainDefinitionMap.put("/subLogin", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/**", "authc");
         filterFactoryBean.setLoginUrl("/login");
