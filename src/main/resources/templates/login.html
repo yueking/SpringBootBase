@@ -10,9 +10,9 @@
 <h3>login page</h3>
 <img src="/images/apple.png"/>
 
-<shiro:authenticated>
-    authenticated
-</shiro:authenticated>
+<!--/*@thymesVar id="message" type="java.lang.String"*/-->
+<span th:text="${message}"/>
+
 <form action="subLogin">
     <input type="text" name="username"/>
     <input type="password" name="password"/>
