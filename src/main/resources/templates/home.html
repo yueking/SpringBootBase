@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
@@ -11,16 +11,9 @@
 
 <img src="/images/apple.png">
 
-<shiro:guest>
-    <button name="user">guest</button>
-</shiro:guest>
-<shiro:user>
-    <button name="user">user</button>
-</shiro:user>
-<shiro:hasRole name="admin">
-    admin role
-</shiro:hasRole>
-
+<shiro:authenticated>
+    authenticated
+</shiro:authenticated>
 
 </body>
 </html>
