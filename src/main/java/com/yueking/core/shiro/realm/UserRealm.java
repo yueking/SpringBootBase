@@ -16,16 +16,20 @@ public class UserRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+
         //1.获取登录名称
-        String username = (String) principals.getPrimaryPrincipal();
+//        String username = (String) principals.getPrimaryPrincipal();
         //2.查找用户
-        User user = userService.findByUsername(username);
+//        User user = userService.findByUsername(username);
+        User user = (User) principals.getPrimaryPrincipal();
         //3.建立授权信息
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
         //4.设置 角色信息和权限信息
         info.setRoles(userService.getRolesByUser(user));
         info.setStringPermissions(userService.getPermissionsByUser(user));
+
+        System.out.println("###:"+user);
 
 
         return info;
@@ -50,7 +54,9 @@ public class UserRealm extends AuthorizingRealm {
             throw new LockedAccountException();
         }
 
-        SimpleAuthenticationInfo authenticationInfo= new SimpleAuthenticationInfo(user.getUsername(),user.getPassword(),getName());
+//        SimpleAuthenticationInfo authenticationInfo= new SimpleAuthenticationInfo(user.getUsername(),user.getPassword(),getName());
+        //第一个参数传入用户信息 而不是用户名时 doGetAuthorizationInfo 可以获得用户信息 而不必再次读取数据库
+        SimpleAuthenticationInfo authenticationInfo= new SimpleAuthenticationInfo(user,user.getPassword(),getName());
         authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(user.getCredentialsSalt()));
         return authenticationInfo;
     }

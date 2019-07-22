@@ -1,9 +1,14 @@
 package com.yueking.core.shiro.service;
 
 import com.yueking.BaseTest;
+import com.yueking.core.shiro.entity.Permission;
+import com.yueking.core.shiro.entity.Role;
 import com.yueking.core.shiro.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.testng.Assert.*;
 
@@ -22,6 +27,7 @@ public class UserServiceTest extends BaseTest {
 
     @Test
     public void testCorrelationRoles() {
+        userService.correlationRoles(8l,4l);
     }
 
     @Test
