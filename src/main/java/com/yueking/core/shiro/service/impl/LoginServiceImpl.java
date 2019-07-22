@@ -44,7 +44,7 @@ public class LoginServiceImpl implements LoginService {
             //return "/index";
         }catch (UnknownAccountException e)
         {
-            e.printStackTrace();
+//            e.printStackTrace();
             msg = "账号不存在";
         }
         catch (IncorrectCredentialsException e)
@@ -52,7 +52,7 @@ public class LoginServiceImpl implements LoginService {
             msg = "密码不正确";
         }
         catch (AuthenticationException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             msg="用户验证失败";
         }
 
