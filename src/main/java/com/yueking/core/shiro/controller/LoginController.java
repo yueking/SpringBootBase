@@ -31,8 +31,8 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping("login")
-    public String login(){
+    @RequestMapping("intoLogin")
+    public String intoLogin(){
         return "login";
     }
 
