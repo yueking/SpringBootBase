@@ -28,6 +28,11 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/subLogin", "anon");
         filterChainDefinitionMap.put("/unauthorized", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
+
+        filterChainDefinitionMap.put("/images/**", "anon");
+        filterChainDefinitionMap.put("/css/**", "anon");
+        filterChainDefinitionMap.put("/js/**", "anon");
+
         filterChainDefinitionMap.put("/**", "authc");
 
         filterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
