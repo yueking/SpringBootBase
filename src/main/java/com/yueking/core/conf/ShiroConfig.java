@@ -58,8 +58,7 @@ public class ShiroConfig {
     @Bean
     ShiroFilterChainDefinition shiroFilterChainDefinition() {
         DefaultShiroFilterChainDefinition chain = new DefaultShiroFilterChainDefinition();
-        chain.addPathDefinition( "/logout", "anon");
-//        chain.addPathDefinition( "/subLogin", "anon");
+        chain.addPathDefinition( "/logout", "logout");
         chain.addPathDefinition( "/subLogin", "anon");
         chain.addPathDefinition( "/login", "anon");
         chain.addPathDefinition( "/**", "authc");
