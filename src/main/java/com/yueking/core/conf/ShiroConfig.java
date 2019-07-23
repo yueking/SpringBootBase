@@ -4,12 +4,8 @@ package com.yueking.core.conf;
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.yueking.core.shiro.realm.UserRealm;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
-import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
-import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,11 +28,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/subLogin", "anon");
         filterChainDefinitionMap.put("/unauthorized", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/**", "user");
+        filterChainDefinitionMap.put("/**", "authc");
 
         filterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-
-
         return filterFactoryBean;
     }
 
