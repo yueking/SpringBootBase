@@ -1,6 +1,5 @@
 package com.yueking.core.conf;
 
-//import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.yueking.core.shiro.realm.UserRealm;
