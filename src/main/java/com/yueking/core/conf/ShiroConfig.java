@@ -60,8 +60,8 @@ public class ShiroConfig {
         DefaultShiroFilterChainDefinition chain = new DefaultShiroFilterChainDefinition();
         chain.addPathDefinition( "/logout", "anon");
 //        chain.addPathDefinition( "/subLogin", "anon");
-        chain.addPathDefinition( "/subLogin", "authc");
-        chain.addPathDefinition( "/login", "authc");
+        chain.addPathDefinition( "/subLogin", "anon");
+        chain.addPathDefinition( "/login", "anon");
         chain.addPathDefinition( "/**", "authc");
         return chain;
     }
