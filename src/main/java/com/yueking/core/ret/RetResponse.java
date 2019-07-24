@@ -1,4 +1,4 @@
-package com.yueking.core.model;
+package com.yueking.core.ret;
 
 public class RetResponse {
     private final static String SUCCESS = "success";

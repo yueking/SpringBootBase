@@ -1,4 +1,4 @@
-package com.yueking.core.model;
+package com.yueking.core.ret;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.yueking.core.model;
+package com.yueking.core.ret;
 
 /**
  * @Description:响应码枚举，参考HTTP状态码的语义

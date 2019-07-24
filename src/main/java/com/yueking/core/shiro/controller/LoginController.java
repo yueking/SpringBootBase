@@ -1,7 +1,7 @@
 package com.yueking.core.shiro.controller;
 
-import com.yueking.core.model.RetResponse;
-import com.yueking.core.model.RetResult;
+import com.yueking.core.ret.RetResponse;
+import com.yueking.core.ret.RetResult;
 import com.yueking.core.shiro.entity.User;
 import com.yueking.core.shiro.model.LoginResult;
 import com.yueking.core.shiro.service.LoginService;
