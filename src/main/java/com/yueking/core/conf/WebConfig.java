@@ -28,6 +28,8 @@ public class WebConfig extends WebMvcConfigurationSupport {
                 SerializerFeature.WriteNullStringAsEmpty,
                 // Number null -> 0
                 SerializerFeature.WriteNullNumberAsZero,
+                //Boolean null -> false
+                SerializerFeature.WriteNullBooleanAsFalse,
                 //禁止循环引用
                 SerializerFeature.DisableCircularReferenceDetect
         );
