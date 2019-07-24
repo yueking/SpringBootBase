@@ -1,5 +1,6 @@
 package com.yueking.core.shiro.service.impl;
 
+import com.yueking.core.ret.ServiceException;
 import com.yueking.core.shiro.dao.RoleDao;
 import com.yueking.core.shiro.dao.UserDao;
 import com.yueking.core.shiro.entity.Permission;
@@ -102,7 +103,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return userDao.findByUsername(username);
+        User user = userDao.findByUsername(username);
+        if (user == null) {
+            throw new ServiceException("暂无该用户");
+        }
+        return user;
     }
 
     @Override
@@ -118,7 +123,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Set<String> getPermissionsByUser(User user) {
         List<Permission> permissionList = new ArrayList<>();
-        Set<String> permissionNameList =  new HashSet<>();
+        Set<String> permissionNameList = new HashSet<>();
 
         if (user != null) {
             Set<Role> userRoles = user.getRoles();

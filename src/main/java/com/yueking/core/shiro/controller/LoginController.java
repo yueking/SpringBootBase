@@ -17,6 +17,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 public class LoginController {
     @Autowired
@@ -77,6 +79,14 @@ public class LoginController {
     @ResponseBody
     @RequestMapping("findUserByUserName")
     public RetResult<User> findUserByUserName(String username) {
+        User user = userService.findByUsername(username);
+        return RetResponse.makeOKRsp(user);
+    }
+    @ResponseBody
+    @RequestMapping("findUserByUserNameExc")
+    public RetResult<User> findUserByUserNameExc(String username) {
+        List a = null;
+        a.size();
         User user = userService.findByUsername(username);
         return RetResponse.makeOKRsp(user);
     }
