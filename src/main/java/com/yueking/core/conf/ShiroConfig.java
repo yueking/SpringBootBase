@@ -25,6 +25,7 @@ public class ShiroConfig {
 
         Map<String, String> filterChainDefinitionMap = new HashMap<>();
         filterChainDefinitionMap.put("/intoLogin", "anon");
+        filterChainDefinitionMap.put("/subLoginREST", "anon");
         filterChainDefinitionMap.put("/subLogin", "anon");
         filterChainDefinitionMap.put("/unauthorized", "anon");
         filterChainDefinitionMap.put("/logout", "logout");

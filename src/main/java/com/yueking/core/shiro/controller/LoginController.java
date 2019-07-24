@@ -1,22 +1,34 @@
 package com.yueking.core.shiro.controller;
 
+import com.yueking.core.model.RetResponse;
+import com.yueking.core.model.RetResult;
 import com.yueking.core.shiro.entity.User;
 import com.yueking.core.shiro.model.LoginResult;
 import com.yueking.core.shiro.service.LoginService;
+import com.yueking.core.shiro.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class LoginController {
     @Autowired
     LoginService loginService;
 
+    @Autowired
+    UserService userService;
+
     @RequestMapping("subLogin")
-    public String subLogin(User user, ModelMap model ) {
+    public String subLogin(User user, ModelMap model) {
         LoginResult loginResult = loginService.login(user.getUsername(), user.getPassword());
-        model.addAttribute("message",loginResult.getResult());
+        model.addAttribute("message", loginResult.getResult());
         if (loginResult.isLogin()) {
             return "home";
         } else {
@@ -25,24 +37,46 @@ public class LoginController {
 
     }
 
+    @ResponseBody
+    @RequestMapping("subLoginREST")
+    public RetResult<User> subLogin2(User user) {
+        Subject currentUser = SecurityUtils.getSubject();
+        //登录
+        try {
+            currentUser.login(new UsernamePasswordToken(user.getUsername(), user.getPassword()));
+        } catch (IncorrectCredentialsException i) {
+            throw new ServiceException("密码输入错误");
+        }
+        //从session取出用户信息
+        user = (User) currentUser.getPrincipal();
+        return RetResponse.makeOKRsp(user);
+
+    }
+
     @RequestMapping("logout")
-    public String logout(){
+    public String logout() {
         loginService.logout();
         return "login";
     }
 
     @RequestMapping("intoLogin")
-    public String intoLogin(){
+    public String intoLogin() {
         return "login";
     }
 
     @RequestMapping("home")
-    public String home(){
+    public String home() {
         return "home";
     }
 
     @RequestMapping("unauthorized")
-    public String unauthorized(){
+    public String unauthorized() {
         return "unauthorized";
+    }
+
+    @ResponseBody
+    @RequestMapping("findUserByUserName")
+    public User findUserByUserName(String username) {
+        return userService.findByUsername(username);
     }
 }
