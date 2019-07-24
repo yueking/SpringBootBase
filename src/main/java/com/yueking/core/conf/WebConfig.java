@@ -23,7 +23,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-@Configuration
+//@Configuration
 public class WebConfig extends WebMvcConfigurationSupport {
     /**
      * 修改自定义消息转换器
