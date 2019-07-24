@@ -24,6 +24,12 @@ public class ShiroConfig {
         filterFactoryBean.setUnauthorizedUrl("unauthorized");
 
         Map<String, String> filterChainDefinitionMap = new HashMap<>();
+//        filterChainDefinitionMap.put("/shiroUtils/noLogin", "anon");
+//        filterChainDefinitionMap.put("/shiroUtils/noAuthorize", "anon");
+//        filterChainDefinitionMap.put("/shiroUtils/currentUser", "authc");
+
+        filterChainDefinitionMap.put("/userInfo", "anon");
+        filterChainDefinitionMap.put("/findUserByUserName", "authc, roles[admin]");
         filterChainDefinitionMap.put("/intoLogin", "anon");
         filterChainDefinitionMap.put("/subLoginREST", "anon");
         filterChainDefinitionMap.put("/subLogin", "anon");
