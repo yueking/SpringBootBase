@@ -2,7 +2,10 @@ package com.yueking.core.conf;
 
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import com.yueking.core.shiro.entity.PermissionResource;
 import com.yueking.core.shiro.realm.UserRealm;
+import com.yueking.core.shiro.service.PermissionResourceService;
+import com.yueking.core.shiro.service.impl.PermissionResourceServiceImpl;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -10,10 +13,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
+    @Bean
+    PermissionResourceService permissionResourceService(){
+       return new PermissionResourceServiceImpl();
+    }
 
     @Bean
     ShiroFilterFactoryBean shiroFilter() {
@@ -27,25 +35,29 @@ public class ShiroConfig {
         filterFactoryBean.setUnauthorizedUrl("unauthorized");
 //        filterFactoryBean.setSuccessUrl("home");
 
+
+
+
         Map<String, String> filterChainDefinitionMap = new HashMap<>();
-//        filterChainDefinitionMap.put("/shiroUtils/noLogin", "anon");
-//        filterChainDefinitionMap.put("/shiroUtils/noAuthorize", "anon");
-//        filterChainDefinitionMap.put("/shiroUtils/currentUser", "authc");
-
-        filterChainDefinitionMap.put("/userInfo", "anon");
-        filterChainDefinitionMap.put("/findUserByUserName", "authc, roles[admin]");
-        filterChainDefinitionMap.put("/intoLogin", "anon");
-        filterChainDefinitionMap.put("/subLoginREST", "anon");
-        filterChainDefinitionMap.put("/subLogin", "anon");
-        filterChainDefinitionMap.put("/unauthorized", "anon");
-        filterChainDefinitionMap.put("/logout", "logout");
-
-        filterChainDefinitionMap.put("/images/**", "anon");
-        filterChainDefinitionMap.put("/css/**", "anon");
-        filterChainDefinitionMap.put("/js/**", "anon");
-
-        filterChainDefinitionMap.put("/**", "authc");
-
+        List<PermissionResource> resources = permissionResourceService().allPermissionResources();
+        for (PermissionResource resource : resources) {
+            filterChainDefinitionMap.put(resource.getUrl(),resource.getPermissionInit());
+        }
+//
+//        filterChainDefinitionMap.put("/userInfo", "anon");
+//        filterChainDefinitionMap.put("/findUserByUserName", "authc, roles[admin]");
+//        filterChainDefinitionMap.put("/intoLogin", "anon");
+//        filterChainDefinitionMap.put("/subLoginREST", "anon");
+//        filterChainDefinitionMap.put("/subLogin", "anon");
+//        filterChainDefinitionMap.put("/unauthorized", "anon");
+//        filterChainDefinitionMap.put("/logout", "logout");
+//
+//        filterChainDefinitionMap.put("/images/**", "anon");
+//        filterChainDefinitionMap.put("/css/**", "anon");
+//        filterChainDefinitionMap.put("/js/**", "anon");
+//
+//        filterChainDefinitionMap.put("/**", "authc");
+//
         filterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return filterFactoryBean;
     }
