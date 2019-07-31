@@ -84,6 +84,13 @@ public class LoginController {
     }
 
     @ResponseBody
+    @RequestMapping("userInfoTest")
+    public RetResult<User> userInfoTest() {
+        User user = userService.findByUsername("yuekinger");
+        return RetResponse.makeOKRsp(user);
+    }
+
+    @ResponseBody
     @RequestMapping("findUserByUserName")
     public RetResult<User> findUserByUserName(String username) {
         User user = userService.findByUsername(username);
