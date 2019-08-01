@@ -14,13 +14,23 @@ public class ModuleDaoTest extends BaseTest {
 
     @Test
     public void testAdd() {
+        //todo module 自动关联级别
         Module module = new Module("module1");
+        Resource resource = new Resource();
+        resource.setName("resource1");
+        resource.setType("type");
+        module.setResource(resource);
 
         moduleDao.saveAndFlush(module);
 
         Module module2 = new Module("module2",module);
+        Resource resource1 = new Resource();
+        resource1.setName("resource2");
+        resource1.setType("type2");
 
-        moduleDao.save(module2);
+        module2.setResource(resource1);
+
+        moduleDao.saveAndFlush(module2);
 
 
     }
