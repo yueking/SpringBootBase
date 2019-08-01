@@ -19,8 +19,8 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
     @Bean
-    PermissionResourceService permissionResourceService(){
-       return new PermissionResourceServiceImpl();
+    PermissionResourceService permissionResourceService() {
+        return new PermissionResourceServiceImpl();
     }
 
     @Bean
@@ -36,14 +36,7 @@ public class ShiroConfig {
 //        filterFactoryBean.setSuccessUrl("home");
 
 
-
-
         Map<String, String> filterChainDefinitionMap = new HashMap<>();
-        List<PermissionResource> resources = permissionResourceService().allPermissionResources();
-        for (PermissionResource resource : resources) {
-            filterChainDefinitionMap.put(resource.getUrl(),resource.getPermissionInit());
-        }
-//
 //        filterChainDefinitionMap.put("/userInfo", "anon");
 //        filterChainDefinitionMap.put("/findUserByUserName", "authc, roles[admin]");
 //        filterChainDefinitionMap.put("/intoLogin", "anon");
@@ -55,9 +48,13 @@ public class ShiroConfig {
 //        filterChainDefinitionMap.put("/images/**", "anon");
 //        filterChainDefinitionMap.put("/css/**", "anon");
 //        filterChainDefinitionMap.put("/js/**", "anon");
-//
 //        filterChainDefinitionMap.put("/**", "authc");
-//
+
+        List<PermissionResource> resources = permissionResourceService().allPermissionResources();
+        for (PermissionResource resource : resources) {
+            filterChainDefinitionMap.put(resource.getUrl(), resource.getPermissionInit());
+        }
+
         filterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return filterFactoryBean;
     }
@@ -76,7 +73,7 @@ public class ShiroConfig {
 
 
     @Bean
-    LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
+    LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
     }
 
@@ -93,15 +90,14 @@ public class ShiroConfig {
     }
 
 
-
 //    @Bean
 //    public static DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
 //        DefaultAdvisorAutoProxyCreator creator = new DefaultAdvisorAutoProxyCreator();
-        /**
-         * setUsePrefix(false)用于解决一个奇怪的bug。在引入spring aop的情况下。
-         * 在@Controller注解的类的方法中加入@RequiresRole注解，会导致该方法无法映射请求，导致返回404。
-         * 加入这项配置能解决这个bug
-         */
+    /**
+     * setUsePrefix(false)用于解决一个奇怪的bug。在引入spring aop的情况下。
+     * 在@Controller注解的类的方法中加入@RequiresRole注解，会导致该方法无法映射请求，导致返回404。
+     * 加入这项配置能解决这个bug
+     */
 //        creator.setUsePrefix(true);
 //        return creator;
 //    }
@@ -119,9 +115,6 @@ public class ShiroConfig {
 //        chain.addPathDefinition( "/**", "authc");
 //        return chain;
 //    }
-
-
-
 
 
     /**
