@@ -34,12 +34,12 @@ public class WebConfig extends WebMvcConfigurationSupport {
      * 静态资源放行
      * @param registry
      */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //静态资源放行
 //        registry.addResourceHandler("/view/**").addResourceLocations("classpath:/view/");
-        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
-    }
+//        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
+//    }
     /**
      * 修改自定义消息转换器
      * @param converters
