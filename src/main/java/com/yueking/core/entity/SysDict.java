@@ -51,8 +51,6 @@ public class SysDict implements Serializable {
     public SysDict(String dictType, String dictValue){
         SysDictKey  key = new SysDictKey(dictType,dictType);
         this.setId(key);
-//        this.setDictType(dictType);
-//        this.setDictKey(dictType);
         this.setDictValue(dictValue);
         this.setRoot(true);
         this.setLevel(0);
@@ -68,8 +66,6 @@ public class SysDict implements Serializable {
     public SysDict(String dictKey, String dictValue, SysDict parentDict){
         SysDictKey  key = new SysDictKey(dictKey,parentDict.getId().getDictType());
         this.setId(key);
-//        this.setDictKey(dictKey);
-//        this.setDictType(parentDict.getDictType());
 
         this.setDictValue(dictValue);
         this.setLevel(parentDict.getLevel()+1);
