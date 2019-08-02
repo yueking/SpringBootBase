@@ -34,11 +34,24 @@ public class WebConfig extends WebMvcConfigurationSupport {
      * 静态资源放行
      * @param registry
      */
-//    @Override
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //静态资源放行
 //        registry.addResourceHandler("/view/**").addResourceLocations("classpath:/view/");
         registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
+
+        registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/");
+        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
+        registry.addResourceHandler("/LESS/**").addResourceLocations("classpath:/static/LESS/");
+        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
+        registry.addResourceHandler("/fonts/**").addResourceLocations("classpath:/static/fonts/");
+        registry.addResourceHandler("/pdf/**").addResourceLocations("classpath:/static/pdf/");
+        registry.addResourceHandler("/font-awesome/**").addResourceLocations("classpath:/static/font-awesome/");
+        registry.addResourceHandler("/email_templates/**").addResourceLocations("classpath:/static/email_templates/");
+        registry.addResourceHandler("/locales/**").addResourceLocations("classpath:/static/locales/");
+
+//        registry.hasMappingForPattern("/**");
+
     }
     /**
      * 修改自定义消息转换器

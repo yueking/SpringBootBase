@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +37,7 @@ public class ShiroConfig {
 //        filterFactoryBean.setSuccessUrl("home");
 
 
-        Map<String, String> filterChainDefinitionMap = new HashMap<>();
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 //        filterChainDefinitionMap.put("/userInfo", "anon");
 //        filterChainDefinitionMap.put("/findUserByUserName", "authc, roles[admin]");
 //        filterChainDefinitionMap.put("/intoLogin", "anon");
