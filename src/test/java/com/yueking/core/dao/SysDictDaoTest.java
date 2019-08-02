@@ -51,4 +51,14 @@ public class SysDictDaoTest extends BaseTest {
     public void testRemove() {
         dictDao.deleteAll();
     }
+
+    @Test
+    public void testOneDict() {
+        SysDict dict = new SysDict("SF","是否");
+        dictDao.save(dict);
+
+        SysDict d1 = new SysDict("1","是",dict);
+        dictDao.save(d1);
+
+    }
 }

@@ -22,8 +22,10 @@ public class SysDict implements Serializable {
     private String dictValue;
 
     @Size(max = 30)
+    @Column(name = "parent_key")
     private String parentKey;
     @Size(max = 30)
+    @Column(name = "parent_type")
     private String parentType;
     private int level;
     private boolean root;
@@ -31,8 +33,8 @@ public class SysDict implements Serializable {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 
     @JoinColumns({
-            @JoinColumn(name = "parentKey", referencedColumnName = "dictKey", insertable = false, updatable = false),
-            @JoinColumn(name = "parentType", referencedColumnName = "dictType", insertable = false, updatable = false)
+            @JoinColumn(name = "parent_key", referencedColumnName = "dict_key", insertable = false, updatable = false),
+            @JoinColumn(name = "parent_type", referencedColumnName = "dict_type", insertable = false, updatable = false)
     })
 
     private Set<SysDict> subDictList;
@@ -49,6 +51,8 @@ public class SysDict implements Serializable {
     public SysDict(String dictType, String dictValue){
         SysDictKey  key = new SysDictKey(dictType,dictType);
         this.setId(key);
+//        this.setDictType(dictType);
+//        this.setDictKey(dictType);
         this.setDictValue(dictValue);
         this.setRoot(true);
         this.setLevel(0);
@@ -64,6 +68,9 @@ public class SysDict implements Serializable {
     public SysDict(String dictKey, String dictValue, SysDict parentDict){
         SysDictKey  key = new SysDictKey(dictKey,parentDict.getId().getDictType());
         this.setId(key);
+//        this.setDictKey(dictKey);
+//        this.setDictType(parentDict.getDictType());
+
         this.setDictValue(dictValue);
         this.setLevel(parentDict.getLevel()+1);
 
