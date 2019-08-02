@@ -29,6 +29,8 @@ public class Module implements Serializable {
 
     private boolean root;
 
+    private int sort;
+
     @Size(max = 33)
     private String parentId;
 
