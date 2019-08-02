@@ -2,6 +2,7 @@ package com.yueking.core.shiro.dao;
 
 import com.yueking.BaseTest;
 import com.yueking.core.shiro.entity.Module;
+import com.yueking.core.shiro.entity.Permission;
 import com.yueking.core.shiro.entity.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
@@ -16,21 +17,29 @@ public class ModuleDaoTest extends BaseTest {
     public void testAdd() {
         //todo module 自动关联级别
         Module module = new Module("module1");
+
         Resource resource = new Resource();
         resource.setName("resource1");
         resource.setType("type");
+        resource.setUrl("URL.com");
+
+        Permission permission = new Permission();
+        permission.setDescription("desc");
+        permission.setPermission(module.getName()+":"+"create");
+
         module.setResource(resource);
+        module.setPermission(permission);
 
         moduleDao.saveAndFlush(module);
 
-        Module module2 = new Module("module2",module);
-        Resource resource1 = new Resource();
-        resource1.setName("resource2");
-        resource1.setType("type2");
-
-        module2.setResource(resource1);
-
-        moduleDao.saveAndFlush(module2);
+//        Module module2 = new Module("module2",module);
+//        Resource resource1 = new Resource();
+//        resource1.setName("resource2");
+//        resource1.setType("type2");
+//
+//        module2.setResource(resource1);
+//
+//        moduleDao.saveAndFlush(module2);
 
 
     }

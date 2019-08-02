@@ -41,8 +41,12 @@ public class Module implements Serializable {
     //    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 //    @JoinColumn(name="resourceId",referencedColumnName="id",insertable = true)
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "resource_id")//关联的表为address表，其主键是id
+    @JoinColumn(name = "resource_id")//关联的表为resources表，其主键是id
     private Resource resource;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "permission_id")//关联的表为resources表，其主键是id
+    private Permission permission;
 
 //    @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 //    @JoinColumn(name = "parentId", referencedColumnName = "id", insertable = true, updatable = false)

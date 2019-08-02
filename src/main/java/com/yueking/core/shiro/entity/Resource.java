@@ -26,4 +26,8 @@ public class Resource implements Serializable {
 
     @Size(max=20)
     private String type;
+
+    @Size(max = 300)
+    private String url;
+
 }
