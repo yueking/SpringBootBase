@@ -22,6 +22,26 @@
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+    <script language="javascript" type="text/javascript">
+        function toSelectNode(url, title, obj) {
+            //1. window.parent.document.getElementById("currentNode").innerHTML = title + "<div class='glyphicon glyphicon-arrow-right'></div>" + obj.innerHTML;// 更新状态条 当前模块位置信息
+            workspace.location.href = url;//右侧主界面地址更新
+            let children = obj.parentElement.parentElement;
+            let childNodes = children.childNodes;
+            //2.取消统计节点的激活 样式
+            for (const chileLI of childNodes) {
+                if(chileLI instanceof  HTMLLIElement){
+                    // chileLI.parentElement.setAttribute("class","active");
+                    chileLI.setAttribute("class","null");
+                }
+
+            }
+            //3.设置 当前节点样式 为 active
+            obj.parentElement.setAttribute("class","active");
+        }
+
+    </script>
+
 </head>
 <body>
 <div id="wrapper">
@@ -32,30 +52,45 @@
                     <div class="dropdown profile-element">
                         <img alt="image" class="rounded-circle" src="img/profile_small.jpg"/>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="block m-t-xs font-bold">David Williams</span>
-                            <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                            <!--/*@thymesVar id="username" type="java.lang.String"*/-->
+                            <span class="block m-t-xs font-bold" th:text="${username}">default message</span>
+                            <!--<span class="text-muted text-xs block">Art Director <b class="caret"></b></span>-->
                         </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
-                            <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
-                            <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
-                            <li class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="logout">Logout</a></li>
-                        </ul>
+                        <!--<ul class="dropdown-menu animated fadeInRight m-t-xs">-->
+                            <!--<li><a class="dropdown-item" href="profile.html">Profile</a></li>-->
+                            <!--<li><a class="dropdown-item" href="contacts.html">Contacts</a></li>-->
+                            <!--<li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>-->
+                            <!--<li class="dropdown-divider"></li>-->
+                            <!--<li><a class="dropdown-item" href="logout">Logout</a></li>-->
+                        <!--</ul>-->
                     </div>
                     <div class="logo-element">
                         IN+
                     </div>
                 </li>
+
                 <li class="active">
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li class="active"><a href="index.html">Dashboard v.1</a></li>
+                        <li class="active"><a href="home">Dashboard v.1</a></li>
                         <li><a href="dashboard_2.html">Dashboard v.2</a></li>
                         <li><a href="dashboard_3.html">Dashboard v.3</a></li>
                         <li><a href="dashboard_4_1.html">Dashboard v.4</a></li>
                         <li><a href="dashboard_5.html">Dashboard v.5 </a></li>
+                    </ul>
+                </li>
+
+                <li class="active" id="titleID">
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">系统管理</span> <span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level" id="UL id">
+                        <li id="li ID"><a id="a id" onclick="toSelectNode('index','字典管理',this);">字典管理</a></li>
+                        <li><a onclick="toSelectNode('index','系统管理',this);">系统管理</a></li>
+                        <li><a onclick="toSelectNode('druid/login.html','数据监控',this);">数据监控</a></li>
+                        <li><a href="index">Dashboard v.2</a></li>
+                        <li><a href="">Dashboard v.4</a></li>
+                        <li><a href="">Dashboard v.5 </a></li>
                     </ul>
                 </li>
             </ul>
@@ -190,8 +225,21 @@
         <div class="row  border-bottom white-bg dashboard-header">
 
         </div>
-        <div class="wrapper wrapper-content">
+        <!--<div class="wrapper wrapper-content">-->
 
+        <!--</div>-->
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center m-t-lg">
+                        <IFRAME style="OVERFLOW: visible" id="workspace" name="workspace"
+                                src="/index" frameBorder=0 width="100%" height="800px" allowTransparency
+                                scrolling=yes>
+                        </IFRAME>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="footer">
             <div class="float-right">
