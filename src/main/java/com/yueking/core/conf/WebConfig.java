@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import javax.servlet.ServletException;
@@ -30,8 +31,14 @@ import java.util.List;
 
 @Configuration
 public class WebConfig extends WebMvcConfigurationSupport {
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/admin/module").setViewName("/admin/modulesManagement");
+    }
+
     /**
      * 静态资源放行
+     *
      * @param registry
      */
     @Override
@@ -53,8 +60,10 @@ public class WebConfig extends WebMvcConfigurationSupport {
 //        registry.hasMappingForPattern("/**");
 
     }
+
     /**
      * 修改自定义消息转换器
+     *
      * @param converters
      */
     @Override
@@ -80,6 +89,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
         converter.setDefaultCharset(Charset.forName("UTF-8"));
         converters.add(converter);
     }
+
     private List<MediaType> getSupportedMediaTypes() {
         List<MediaType> supportedMediaTypes = new ArrayList<>();
         supportedMediaTypes.add(MediaType.APPLICATION_JSON);
@@ -105,6 +115,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
 
     /**
      * 系统异常处理
+     *
      * @param exceptionResolvers
      */
     @Override
@@ -114,10 +125,11 @@ public class WebConfig extends WebMvcConfigurationSupport {
 
     /**
      * 创建异常处理
+     *
      * @return
      */
-    private HandlerExceptionResolver getHandlerExceptionResolver(){
-        HandlerExceptionResolver handlerExceptionResolver = new HandlerExceptionResolver(){
+    private HandlerExceptionResolver getHandlerExceptionResolver() {
+        HandlerExceptionResolver handlerExceptionResolver = new HandlerExceptionResolver() {
             @Override
             public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response,
                                                  Object handler, Exception e) {
@@ -129,9 +141,9 @@ public class WebConfig extends WebMvcConfigurationSupport {
                     result.setCode(RetCode.NOT_FOUND).setMsg("接口 [" + request.getRequestURI() + "] 不存在");
                 } else if (e instanceof UnauthorizedException) {
                     result.setCode(RetCode.UNAUTHEN).setMsg("用户没有访问权限").setData(null);
-                }else if (e instanceof UnauthenticatedException) {
+                } else if (e instanceof UnauthenticatedException) {
                     result.setCode(RetCode.UNAUTHEN).setMsg("用户未登录").setData(null);
-                }else if (e instanceof ServletException) {
+                } else if (e instanceof ServletException) {
                     result.setCode(RetCode.FAIL).setMsg(e.getMessage());
                 } else {
                     result.setCode(RetCode.INTERNAL_SERVER_ERROR).setMsg("接口 [" + request.getRequestURI() + "] 内部错误，请联系管理员");
@@ -153,12 +165,13 @@ public class WebConfig extends WebMvcConfigurationSupport {
 
     /**
      * 根据异常类型确定返回数据
+     *
      * @param request
      * @param handler
      * @param e
      * @return
      */
-    private RetResult<Object> getResuleByHeandleException(HttpServletRequest request, Object handler, Exception e){
+    private RetResult<Object> getResuleByHeandleException(HttpServletRequest request, Object handler, Exception e) {
         RetResult<Object> result = new RetResult<>();
         if (e instanceof ServiceException) {
             result.setCode(RetCode.FAIL).setMsg(e.getMessage()).setData(null);
@@ -173,7 +186,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             message = String.format("接口 [%s] 出现异常，方法：%s.%s，异常摘要：%s", request.getRequestURI(),
-                    handlerMethod.getBean().getClass().getName(), handlerMethod.getMethod() .getName(), e.getMessage());
+                    handlerMethod.getBean().getClass().getName(), handlerMethod.getMethod().getName(), e.getMessage());
         } else {
             message = e.getMessage();
         }
@@ -181,10 +194,10 @@ public class WebConfig extends WebMvcConfigurationSupport {
     }
 
     /**
-     * @Title: responseResult
-     * @Description: 响应结果
      * @param response
      * @param result
+     * @Title: responseResult
+     * @Description: 响应结果
      * @Reutrn void
      */
     private void responseResult(HttpServletResponse response, RetResult<Object> result) {
@@ -192,11 +205,10 @@ public class WebConfig extends WebMvcConfigurationSupport {
         response.setHeader("Content-type", "application/json;charset=UTF-8");
         response.setStatus(200);
         try {
-            response.getWriter().write(JSON.toJSONString(result,SerializerFeature.WriteMapNullValue));
+            response.getWriter().write(JSON.toJSONString(result, SerializerFeature.WriteMapNullValue));
         } catch (IOException ex) {
         }
     }
-
 
 
 }
