@@ -33,7 +33,8 @@ import java.util.List;
 public class WebConfig extends WebMvcConfigurationSupport {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/admin/module").setViewName("/admin/modulesManagement");
+        registry.addViewController("/admin/module").setViewName("/admin/moduleManagement");
+        registry.addViewController("/admin/dict").setViewName("/admin/dictManagement");
     }
 
     /**
