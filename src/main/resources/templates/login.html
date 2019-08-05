@@ -2,31 +2,67 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="shortcut icon" href="/images/apple.png">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INSPINIA | Login</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
 </head>
-<body>
-<h3>login page</h3>
-<img src="/images/apple.png"/>
 
-<!--/*@thymesVar id="message" type="java.lang.String"*/-->
-<span th:text="${message}">default message</span>
+<body class="gray-bg">
 
-<label value="label"/>
-<form action="subLogin">
-    <input type="text" name="username"/>
-    <input type="password" name="password"/>
-    <input type="submit" value="submit ..."/>
-</form>
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <div>
 
-<shiro:authenticated>
-    authenticated
-</shiro:authenticated>
+            <h1 class="logo-name">IN+</h1>
 
-<shiro:guest>
-    guest
-</shiro:guest>
+        </div>
+        <h3>Welcome to IN+</h3>
+        <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
+            <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
+        </p>
+        <p>Login in. To see it in action.</p>
+
+        <div class="alert alert-danger">
+            <!--/*@thymesVar id="message" type="java.lang.String"*/-->
+            <span th:text="${message}">default message</span>
+        </div>
+        <form class="m-t" role="form" action="subLogin">
+            <div class="form-group">
+                <input type="text" name="username" class="form-control" placeholder="Username" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" class="form-control" placeholder="Password" required="">
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+            <a href="#">
+                <small>Forgot password?</small>
+            </a>
+            <p class="text-muted text-center">
+                <small>Do not have an account?</small>
+            </p>
+            <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
+        </form>
+        <p class="m-t">
+            <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small>
+        </p>
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.js"></script>
 
 </body>
+
 </html>

@@ -53,7 +53,14 @@ public class UserRealm extends AuthorizingRealm {
         }
 
         String username = (String) token.getPrincipal();
-        User user = userService.findByUsername(username);
+
+        User user = null;
+        try {
+            user = userService.findByUsername(username);
+        } catch (Exception e) {
+            //找不到账号
+            throw new UnknownAccountException();
+        }
         if (user == null) {
             //找不到账号
             throw new UnknownAccountException();
