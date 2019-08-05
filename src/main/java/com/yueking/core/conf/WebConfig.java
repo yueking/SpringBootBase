@@ -35,6 +35,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/admin/module").setViewName("/admin/moduleManagement");
         registry.addViewController("/admin/dict").setViewName("/admin/dictManagement");
+        registry.addViewController("/admin/user").setViewName("/admin/userManagement");
     }
 
     /**
