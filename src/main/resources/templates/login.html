@@ -31,7 +31,7 @@
         </p>
         <p>Login in. To see it in action.</p>
 
-        <div class="alert alert-danger">
+        <div class="alert alert-danger" th:if="${message!=null}">
             <!--/*@thymesVar id="message" type="java.lang.String"*/-->
             <span th:text="${message}">default message</span>
         </div>
