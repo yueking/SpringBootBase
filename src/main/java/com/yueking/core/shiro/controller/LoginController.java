@@ -32,6 +32,7 @@ public class LoginController {
         LoginResult loginResult = loginService.login(user.getUsername(), user.getPassword());
         model.addAttribute("message", loginResult.getResult());
         if (loginResult.isLogin()) {
+            model.addAttribute("username", user.getUsername());
             return "home";
         } else {
             return "login";
@@ -64,6 +65,11 @@ public class LoginController {
     @RequestMapping("intoLogin")
     public String intoLogin() {
         return "login";
+    }
+
+    @RequestMapping("index")
+    public String index() {
+        return "index";
     }
 
     @RequestMapping("home")
